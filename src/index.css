@@ -1,0 +1,50 @@
+:root {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+
+    color: rgb(var(--primary-color));
+    background-color: rgb(var(--background-color));
+
+    --income-color: 32, 177, 72;
+    --expense-color: 217, 53, 60;
+    --accent-color: 61, 123, 230;
+    --primary-color: 208, 210, 215;
+    --secondary-color: 131, 133, 136;
+    --background-color: 18, 18, 18;
+    --foreground-color: 28, 28, 30;
+    --input-color: 50, 51, 52;
+
+    --transition-duration: 0.25s;
+
+    --border-radius: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+h1 {
+    font-size: 2rem;
+    letter-spacing: -1px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+p, span, a {
+    font-size: 0.9375rem;
+}
+
+small {
+    font-size: 0.75rem;
+}
+
+b {
+    font-weight: bold;
+}

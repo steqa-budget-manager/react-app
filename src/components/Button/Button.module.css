@@ -1,0 +1,41 @@
+.button {
+    --color: var(--primary-color);
+    --background-color: var(--input-color);
+    width: 100%;
+    padding: 16px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    background-color: rgb(var(--background-color));
+    font-size: 0.75rem;
+    color: rgb(var(--color));
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background-color var(--transition-duration), border var(--transition-duration);
+}
+
+.accent {
+    --background-color: var(--accent-color);
+}
+
+.button:hover {
+    background-color: rgba(var(--background-color), 0.8);
+    border-color: rgb(var(--background-color));
+}
+
+.button:active {
+    background-color: rgba(var(--background-color), 1);
+}
+
+.button.link {
+    --color: var(--secondary-color);
+    background-color: transparent;
+}
+
+.button.link:hover {
+    background-color: rgba(var(--secondary-color), 0.07);
+    border-color: rgba(var(--secondary-color), 0.07);
+}
+
+.button.link:active {
+    background-color: rgba(var(--secondary-color), 0.12);
+}
