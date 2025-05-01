@@ -8,7 +8,7 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType>(
 	{
 		isLogged: false,
-		setIsLogged: (isLogged: boolean): void => {
+		setIsLogged: (): void => {
 		}
 	}
 );

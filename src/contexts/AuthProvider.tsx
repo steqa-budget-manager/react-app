@@ -7,7 +7,7 @@ import {
 	isAccessTokenExpired,
 	isRefreshTokenExpired,
 	setTokens
-} from "../utils/auth-utils";
+} from "../utils/authUtils.ts";
 import {refreshTokenRequest} from "../api/requests/auth/refreshTokenRequest";
 import api from "../api/api.ts";
 import {PLoading} from "../pages/Loading/PLoading.tsx";

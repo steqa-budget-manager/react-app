@@ -14,7 +14,10 @@ function App() {
 							<div className={classes.heightContainer}>
 								<div className={classes.widthContainer}>
 									<div className={classes.content}>
-										<RouterProvider router={isLogged ? loggedInRouter : loggedOutRouter}/>
+										<RouterProvider
+											key={isLogged ? "loggedIn" : "loggedOut"}
+											router={isLogged ? loggedInRouter : loggedOutRouter}
+										/>
 									</div>
 								</div>
 							</div>

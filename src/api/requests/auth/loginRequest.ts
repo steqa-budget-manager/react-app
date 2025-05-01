@@ -2,12 +2,13 @@ import axios from "axios";
 import {TokensResponse} from "../../schemas/auth/TokensResponse.ts";
 import {URL} from "../../config.ts";
 
-export const refreshTokenRequest = async (refreshToken: string): Promise<TokensResponse> => {
+export const loginRequest = async (email: string, password: string): Promise<TokensResponse> => {
 	const data = {
-		refresh: refreshToken,
+		email: email,
+		password: password,
 	}
 	const response = await axios.post(
-		URL + "/api/v1/auth/refresh",
+		URL + "/api/v1/auth/login",
 		data
 	)
 	return response.data

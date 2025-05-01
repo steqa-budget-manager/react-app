@@ -29,4 +29,8 @@ export const loggedOutRouter = createBrowserRouter([
 		path: "/",
 		element: (<Navigate to="/login" replace={true}/>)
 	},
+	{
+		path: "/incomes",
+		element: (<Navigate to="/login" replace={true}/>)
+	},
 ])

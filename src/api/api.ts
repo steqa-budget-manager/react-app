@@ -6,9 +6,9 @@ import {
 	isAccessTokenExpired,
 	isRefreshTokenExpired,
 	setTokens,
-} from "../utils/auth-utils.ts";
+} from "../utils/authUtils.ts";
 import {refreshTokenRequest} from "./requests/auth/refreshTokenRequest.ts";
-import {RefreshTokenResponse} from "./schemas/auth/RefreshTokenResponse.ts";
+import {TokensResponse} from "./schemas/auth/TokensResponse.ts";
 import {URL} from "./config.ts";
 
 const api = axios.create({
@@ -33,7 +33,7 @@ api.interceptors.request.use(
 			if (!isRefreshing) {
 				isRefreshing = true;
 				try {
-					const response: RefreshTokenResponse = await refreshTokenRequest(refreshToken);
+					const response: TokensResponse = await refreshTokenRequest(refreshToken);
 					setTokens(response.access, response.refresh);
 					token = response.access;
 				} catch (err) {

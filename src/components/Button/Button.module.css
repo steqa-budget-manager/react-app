@@ -26,6 +26,15 @@
     background-color: rgba(var(--background-color), 1);
 }
 
+.button:disabled {
+    background-color: rgba(var(--background-color), 0.6);
+    cursor: not-allowed;
+}
+
+.button:disabled:hover {
+    border-color: transparent;
+}
+
 .button.link {
     --color: var(--secondary-color);
     background-color: transparent;
