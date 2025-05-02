@@ -1,7 +1,7 @@
 import {Input} from "../../components/Input/Input.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import classes from "./LoginForm.module.css";
-import {FC, useContext, useEffect, useMemo} from "react";
+import {FC, FormEvent, useContext, useEffect, useMemo} from "react";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {loginRequest} from "../../api/requests/auth/loginRequest.ts";
 import {setTokens} from "../../utils/authUtils.ts";
@@ -34,7 +34,8 @@ export const LoginForm: FC<LoginFormProps> = ({onSubmit, setError}) => {
 		);
 	}, [emailEmpty, passwordEmpty, emailValid, passwordValid]);
 
-	const onClick = async () => {
+	const submit = async (e: FormEvent) => {
+		e.preventDefault();
 		await fetchLogin(email, password)
 			.then((response) => {
 				setIsLogged(true);
@@ -48,18 +49,18 @@ export const LoginForm: FC<LoginFormProps> = ({onSubmit, setError}) => {
 	}, [loginError]);
 
 	return (
-		<div className={classes.container}>
+		<form onSubmit={(e: FormEvent) => submit(e)} className={classes.container}>
 			<Input placeholder="Почта" value={email} setValue={setEmail}/>
 			<InputError errors={emailErrors}/>
 			<Input placeholder="Пароль" value={password} setValue={setPassword}/>
 			<InputError errors={passwordErrors}/>
 			<Button
 				accent
-				onClick={onClick}
+				type="submit"
 				active={buttonActive && !isLoading}
 			>
 				{isLoading ? "Загрузка..." : "Войти"}
 			</Button>
-		</div>
+		</form>
 	)
 }

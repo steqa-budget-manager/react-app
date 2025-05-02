@@ -4,7 +4,8 @@ import clsx from "clsx";
 
 interface ButtonProps {
 	children: ReactNode,
-	onClick: () => void,
+	onClick?: () => void,
+	type?: "button" | "submit",
 	active?: boolean,
 	accent?: boolean,
 	link?: boolean,
@@ -13,7 +14,9 @@ interface ButtonProps {
 export const Button: FC<ButtonProps> = (
 	{
 		children,
-		onClick,
+		onClick = () => {
+		},
+		type = "button",
 		active = true,
 		accent = false,
 		link = false,
@@ -27,6 +30,7 @@ export const Button: FC<ButtonProps> = (
 					[classes.link]: link,
 				}
 			)}
+			type={type}
 			disabled={!active}
 			onClick={onClick}
 		>{children}</button>
