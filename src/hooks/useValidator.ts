@@ -2,7 +2,7 @@ import {Dispatch, SetStateAction, useEffect, useState} from "react";
 
 type ValidateCallback<T> = (value: T, extraValue?: T) => string[]
 
-type UseValidateReturn<T> = [
+type UseValidate<T> = [
 	T,
 	Dispatch<SetStateAction<T>>,
 	boolean,
@@ -15,7 +15,7 @@ export const useValidator = <T>(
 	defaultValue: T,
 	validateFunc: ValidateCallback<T>,
 	extraValue?: T
-): UseValidateReturn<T> => {
+): UseValidate<T> => {
 	const [value, setValue] = useState<T>(defaultValue)
 	const [errors, setErrors] = useState<string[]>([])
 	const [isValid, setIsValid] = useState<boolean>(true)

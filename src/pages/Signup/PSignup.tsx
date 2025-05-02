@@ -1,18 +1,18 @@
-import classes from "./Login.module.css"
-import {LoginForm} from "../../blocks/LoginForm/LoginForm.tsx";
+import classes from "./Signup.module.css"
 import {Button} from "../../components/Button/Button.tsx";
 import {useNavigate} from "react-router-dom";
+import {SignupForm} from "../../blocks/SignupForm/SignupForm.tsx";
 import {useEffect} from "react";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
 
-export const PLogin = () => {
+export const PSignup = () => {
 	const navigate = useNavigate();
 	const [messages, addMessage] = useMessagesTimeStack();
 
 	useEffect(() => {
-		document.title = "Вход";
+		document.title = "Регистрация";
 	}, []);
 
 	return (
@@ -24,8 +24,8 @@ export const PLogin = () => {
 				))}
 			</ToastBar>
 			<div className={classes.form}>
-				<LoginForm onError={addMessage} onSubmit={() => navigate("/")}/>
-				<Button link onClick={() => navigate("/signup")}>Зарегистрироваться</Button>
+				<SignupForm onError={addMessage} onSubmit={() => navigate("/")}/>
+				<Button link onClick={() => navigate("/login")}>Войти</Button>
 			</div>
 		</div>
 	)

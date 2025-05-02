@@ -1,0 +1,17 @@
+.toast {
+    --background-color: var(--secondary-color);
+    --color: var(--primary-color);
+    width: 100%;
+    background-color: rgb(var(--background-color));
+    padding: 16px;
+    border-radius: var(--border-radius);
+}
+
+.toast .message {
+    color: rgb(var(--color));
+}
+
+.error {
+    --background-color: var(--error-toast);
+    --color: var(--error-color);
+}

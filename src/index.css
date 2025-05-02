@@ -15,6 +15,7 @@
     --foreground-color: 28, 28, 30;
     --input-color: 50, 51, 52;
     --error-color: 217, 53, 60;
+    --error-toast: 67, 26, 28;
 
     --transition-duration: 0.25s;
 

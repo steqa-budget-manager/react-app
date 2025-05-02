@@ -6,6 +6,7 @@ type UseHttpRequest<T extends unknown[], R> = [
 	request: (...args: T) => Promise<R>,
 	isLoading: boolean,
 	error: string | null,
+	resetError: () => void,
 ];
 
 export const useHttpRequest = <T extends unknown[], R>(
@@ -36,5 +37,9 @@ export const useHttpRequest = <T extends unknown[], R>(
 		}
 	};
 
-	return [request, isLoading, error];
+	const resetError = () => {
+		setError(null)
+	}
+
+	return [request, isLoading, error, resetError];
 };

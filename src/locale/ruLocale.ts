@@ -15,6 +15,12 @@ ru.set(
 	"Пользователь не найден."
 );
 
+ru.set(
+	"User with this email already exists",
+	"Пользователь с таким адресом электронной почты уже существует."
+);
+
+
 export const ruLocale = (str: string): string => {
 	return ru.get(str) ?? str;
 }

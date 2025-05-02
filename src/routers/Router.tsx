@@ -1,6 +1,6 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 import {PLogin} from "../pages/Login/PLogin.tsx";
-import {PRegistration} from "../pages/Registration/PRegistration.tsx";
+import {PSignup} from "../pages/Signup/PSignup.tsx";
 import {PIncomes} from "../pages/Incomes/PIncomes.tsx";
 
 
@@ -22,8 +22,8 @@ export const loggedOutRouter = createBrowserRouter([
 		element: (<PLogin/>)
 	},
 	{
-		path: "/registration",
-		element: (<PRegistration/>)
+		path: "/signup",
+		element: (<PSignup/>)
 	},
 	{
 		path: "/",
