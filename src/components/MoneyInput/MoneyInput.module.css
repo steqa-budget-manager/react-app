@@ -1,0 +1,52 @@
+.wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.input {
+    position: relative;
+    width: 100%;
+    padding: 16px 36px 16px 16px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    background-color: rgb(var(--input-color));
+    outline: none;
+    font-size: 0.75rem;
+    color: rgb(var(--primary-color));
+    transition: border var(--transition-duration);
+}
+
+.input::placeholder {
+    color: rgb(var(--secondary-color));
+}
+
+.input:hover {
+    border-color: rgba(var(--primary-color), 0.2);
+}
+
+.input:focus {
+    border-color: rgba(var(--primary-color), 0.5);
+}
+
+.symbol {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(var(--secondary-color));
+    font-size: 0.75rem;
+    padding: 16px;
+    pointer-events: none;
+    user-select: none;
+}
+
+.input::-webkit-inner-spin-button,
+.input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input {
+    -moz-appearance: textfield;
+}
