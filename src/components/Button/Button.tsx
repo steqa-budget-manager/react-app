@@ -7,7 +7,9 @@ interface ButtonProps {
 	onClick?: () => void,
 	type?: "button" | "submit",
 	active?: boolean,
+	transparent?: boolean,
 	accent?: boolean,
+	income?: boolean,
 	link?: boolean,
 }
 
@@ -18,7 +20,9 @@ export const Button: FC<ButtonProps> = (
 		},
 		type = "button",
 		active = true,
+		transparent = false,
 		accent = false,
+		income = false,
 		link = false,
 	}
 ) => {
@@ -26,7 +30,9 @@ export const Button: FC<ButtonProps> = (
 		<button
 			className={clsx(
 				classes.button, {
+					[classes.transparent]: transparent,
 					[classes.accent]: accent,
+					[classes.income]: income,
 					[classes.link]: link,
 				}
 			)}

@@ -1,6 +1,6 @@
 .button {
-    --color: var(--primary-color);
-    --background-color: var(--input-color);
+    --color: var(--accent-color);
+    --background-color: var(--foreground-color);
     width: 100%;
     padding: 16px;
     border: 2px solid transparent;
@@ -13,11 +13,22 @@
     outline: none;
     cursor: pointer;
     touch-action: manipulation;
-    transition: background-color var(--transition-duration), border var(--transition-duration);
+    transition: background-color var(--transition-duration), color var(--transition-duration), border var(--transition-duration);
 }
 
 .accent {
+    --color: var(--primary-color);
     --background-color: var(--accent-color);
+}
+
+.income {
+    --color: var(--primary-color);
+    --background-color: var(--income-color);
+}
+
+.transparent {
+    --color: var(--background-color);
+    background-color: rgba(var(--background-color), 0.25);
 }
 
 .button:hover, .button:focus {
@@ -25,12 +36,18 @@
     border-color: rgb(var(--background-color));
 }
 
+.transparent:hover, .transparent:focus {
+    background-color: rgba(var(--background-color), 0.35);
+    border-color: rgba(var(--background-color), 0.2);
+}
+
 .button:active {
     background-color: rgba(var(--background-color), 1);
 }
 
 .button:disabled {
-    background-color: rgba(var(--background-color), 0.6);
+    color: rgba(var(--color), 0.4);
+    background-color: rgba(var(--background-color), 0.15);
     cursor: not-allowed;
 }
 
