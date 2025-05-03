@@ -32,40 +32,43 @@ export const DropdownInput: FC<DropdownInputProps> = ({children, setValue, place
 	}, [open]);
 
 	return (
-		<div
-			className={clsx(
-				classes.container,
-				open && (direction === "bottom" ? classes.bottom : classes.top)
-			)}
-		>
+		<>
 			<div
-				ref={containerRef}
 				className={clsx(
-					classes.input, {
-						[classes.open]: open,
-					}
+					classes.container,
+					open && (direction === "bottom" ? classes.bottom : classes.top)
 				)}
-				onClick={() => setOpen(!open)}
 			>
-				{selected ? (
-					<small>{selected}</small>
-				) : (
-					<small className={classes.placeholder}>{placeholder}</small>
-				)}
-			</div>
-			{open && (
-				<div ref={dropdownRef} className={classes.dropdown}>
-					{Children.map(children, (child) =>
-						cloneElement(child, {
-							onClick: () => {
-								setValue(child.props.value);
-								setSelected(child.props.label);
-								setOpen(false);
-							},
-						})
+				<div
+					ref={containerRef}
+					className={clsx(
+						classes.input, {
+							[classes.open]: open,
+						}
+					)}
+					onClick={() => setOpen(!open)}
+				>
+					{selected ? (
+						<small>{selected}</small>
+					) : (
+						<small className={classes.placeholder}>{placeholder}</small>
 					)}
 				</div>
-			)}
-		</div>
+				{open && (
+					<div ref={dropdownRef} className={classes.dropdown}>
+						{Children.map(children, (child) =>
+							cloneElement(child, {
+								onClick: () => {
+									setValue(child.props.value);
+									setSelected(child.props.label);
+									setOpen(false);
+								},
+							})
+						)}
+					</div>
+				)}
+			</div>
+			{open && (<div className={classes.closeTrigger} onClick={() => setOpen(false)}></div>)}
+		</>
 	)
 }
