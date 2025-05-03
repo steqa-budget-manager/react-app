@@ -8,9 +8,9 @@ import {
 	isRefreshTokenExpired,
 	setTokens
 } from "../utils/authUtils.ts";
-import {refreshTokenRequest} from "../api/requests/auth/refreshTokenRequest";
 import api from "../api/api.ts";
 import {PLoading} from "../pages/Loading/PLoading.tsx";
+import {refreshTokenRequest} from "../api/requests/authRequests.ts";
 
 interface Props {
 	children: ReactNode;

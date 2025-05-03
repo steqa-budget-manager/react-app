@@ -7,12 +7,12 @@ import {
 	isRefreshTokenExpired,
 	setTokens,
 } from "../utils/authUtils.ts";
-import {refreshTokenRequest} from "./requests/auth/refreshTokenRequest.ts";
 import {TokensResponse} from "./schemas/auth/TokensResponse.ts";
 import {URL} from "./config.ts";
+import {refreshTokenRequest} from "./requests/authRequests.ts";
 
 const api = axios.create({
-	baseURL: URL + "api/v1",
+	baseURL: URL + "/api/v1",
 });
 
 let isRefreshing = false;

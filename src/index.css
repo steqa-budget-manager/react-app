@@ -41,10 +41,12 @@ h2 {
 
 p, span, a {
     font-size: 0.9375rem;
+    letter-spacing: -0.5px;
 }
 
 small {
     font-size: 0.75rem;
+    letter-spacing: -0.5px;
 }
 
 b {

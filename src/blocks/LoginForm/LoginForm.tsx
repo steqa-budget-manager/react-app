@@ -3,13 +3,13 @@ import {Button} from "../../components/Button/Button.tsx";
 import classes from "./LoginForm.module.css";
 import {FC, FormEvent, useContext, useEffect, useMemo} from "react";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
-import {loginRequest} from "../../api/requests/auth/loginRequest.ts";
 import {setTokens} from "../../utils/authUtils.ts";
 import {useValidator} from "../../hooks/useValidator.ts";
 import {emailValidator} from "../../validators/emailValidator.ts";
 import {InputError} from "../../components/InputError/InputError.tsx";
 import {passwordValidator} from "../../validators/passwordValidator.tsx";
 import {AuthContext} from "../../contexts/AuthContext.tsx";
+import {loginRequest} from "../../api/requests/authRequests.ts";
 
 export interface LoginFormProps {
 	onSubmit?: () => void
@@ -21,9 +21,9 @@ export const LoginForm: FC<LoginFormProps> = ({onSubmit, onError}) => {
 	const [password, setPassword, passwordValid, passwordEmpty, passwordErrors] = useValidator<string>("", passwordValidator);
 	const {setIsLogged} = useContext(AuthContext);
 
-	const [fetchLogin, isLoading, loginError, resetLoginError] = useHttpRequest(async (email: string, password: string) => {
-		return loginRequest(email, password);
-	})
+	const [fetchLogin, isLoading, loginError, resetLoginError] = useHttpRequest(
+		async (email: string, password: string) => loginRequest(email, password)
+	)
 
 	const buttonActive = useMemo(() => {
 		return (

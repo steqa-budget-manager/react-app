@@ -1,0 +1,34 @@
+.card {
+    background-color: rgb(var(--foreground-color));
+    border-radius: var(--border-radius);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    --total-color: var(--primary-color);
+}
+
+.card.income {
+    --total-color: var(--income-color)
+}
+
+.card.expense {
+    --total-color: var(--expense-color)
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.total {
+    color: rgb(var(--total-color));
+    text-shadow: 0 0 16px rgba(var(--total-color), 0.3);
+}
+
+.transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

@@ -9,7 +9,8 @@ import {AuthContext} from "../../contexts/AuthContext.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {setTokens} from "../../utils/authUtils.ts";
 import {InputError} from "../../components/InputError/InputError.tsx";
-import {signupRequest} from "../../api/requests/auth/signupRequest.ts";
+
+import {signupRequest} from "../../api/requests/authRequests.ts";
 
 export interface SignupFormProps {
 	onSubmit?: () => void
@@ -21,9 +22,9 @@ export const SignupForm: FC<SignupFormProps> = ({onSubmit, onError}) => {
 	const [password, setPassword, passwordValid, passwordEmpty, passwordErrors] = useValidator<string>("", passwordValidator);
 	const {setIsLogged} = useContext(AuthContext);
 
-	const [fetchSignup, isLoading, signupError, resetSignupError] = useHttpRequest(async (email: string, password: string) => {
-		return signupRequest(email, password);
-	})
+	const [fetchSignup, isLoading, signupError, resetSignupError] = useHttpRequest(
+		async (email: string, password: string) => signupRequest(email, password)
+	)
 
 	const buttonActive = useMemo(() => {
 		return (

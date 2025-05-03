@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container .left {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.container .left::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(to left, rgba(var(--foreground-color), 1) 35%, transparent 100%);
+}
+
+.container .right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: end;
+    width: fit-content;
+}
+
+.description {
+    white-space: nowrap;
+}
+
+.amount {
+    white-space: nowrap;
+}
+
+.secondary {
+    color: rgb(var(--secondary-color));
+}
