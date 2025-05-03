@@ -2,12 +2,13 @@ import {FC, ReactElement} from "react";
 import {TransactionProps} from "../../components/Transaction/Transaction.tsx";
 import classes from "./TransactionsCard.module.css";
 import clsx from "clsx";
+import {fromCents} from "../../utils/moneyConverters.ts";
 
 export interface TransactionsCardProps {
 	income?: boolean;
 	expense?: boolean;
 	date: Date
-	total: number
+	total: bigint
 	children: ReactElement<TransactionProps> | ReactElement<TransactionProps>[];
 }
 
@@ -27,8 +28,6 @@ export const TransactionsCard: FC<TransactionsCardProps> = (
 		year: "numeric",
 	} as const).replace(/г\./, "");
 
-	const formattedTotal = new Intl.NumberFormat("ru-RU").format(total);
-
 	return (
 		<div
 			className={clsx(
@@ -40,7 +39,7 @@ export const TransactionsCard: FC<TransactionsCardProps> = (
 		>
 			<div className={classes.header}>
 				<p><b>{formattedDate}</b></p>
-				<small className={classes.total}>{formattedTotal} ₽</small>
+				<small className={classes.total}>{fromCents(total)} ₽</small>
 			</div>
 			<div className={classes.transactions}>{children}</div>
 		</div>

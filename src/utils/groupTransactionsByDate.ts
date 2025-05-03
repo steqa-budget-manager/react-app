@@ -4,7 +4,7 @@ export interface TransactionsGroup {
 	key: string;
 	date: Date;
 	transactions: TransactionResponse[];
-	total: number;
+	total: bigint;
 }
 
 export function groupTransactionsByDate(
@@ -16,7 +16,7 @@ export function groupTransactionsByDate(
 		let group = groups.find((g) => g.key === dateKey);
 
 		if (!group) {
-			group = {key: dateKey, date: transaction.date, transactions: [], total: 0};
+			group = {key: dateKey, date: transaction.date, transactions: [], total: BigInt(0)};
 			groups.push(group);
 		}
 

@@ -7,7 +7,7 @@ import {setTokens} from "../../utils/authUtils.ts";
 import {useValidator} from "../../hooks/useValidator.ts";
 import {emailValidator} from "../../validators/emailValidator.ts";
 import {InputError} from "../../components/InputError/InputError.tsx";
-import {passwordValidator} from "../../validators/passwordValidator.tsx";
+import {passwordValidator} from "../../validators/passwordValidator.ts";
 import {AuthContext} from "../../contexts/AuthContext.tsx";
 import {loginRequest} from "../../api/requests/authRequests.ts";
 

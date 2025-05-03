@@ -4,7 +4,7 @@ import classes from "./SignupForm.module.css";
 import {FC, FormEvent, useContext, useEffect, useMemo} from "react";
 import {useValidator} from "../../hooks/useValidator.ts";
 import {emailValidator} from "../../validators/emailValidator.ts";
-import {passwordValidator} from "../../validators/passwordValidator.tsx";
+import {passwordValidator} from "../../validators/passwordValidator.ts";
 import {AuthContext} from "../../contexts/AuthContext.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {setTokens} from "../../utils/authUtils.ts";

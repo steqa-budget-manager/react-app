@@ -7,28 +7,36 @@ import "./DateInput.css"
 
 interface DateInputProps {
 	value: Date | null;
-	setValue: (value: Date) => void;
+	setValue: (value: Date | null) => void;
 	placeholder?: string,
 }
 
 export const DateInput: FC<DateInputProps> = ({value, setValue, placeholder}) => {
+	const handleChange = (date: Date | null) => {
+		if (date) {
+			const nowUtc = new Date();
+			date.setUTCHours(nowUtc.getUTCHours(), nowUtc.getUTCMinutes(), nowUtc.getUTCSeconds(), nowUtc.getUTCMilliseconds());
+			setValue(date);
+		} else {
+			setValue(null);
+		}
+	};
+
 	return (
-		<>
-			<div style={{width: "100%"}}>
-				<DatePicker
-					selected={value}
-					onChange={(date) => setValue(date!)}
-					dateFormat="dd.MM.yyyy"
-					placeholderText={placeholder}
-					withPortal
-					showMonthDropdown
-					showYearDropdown
-					isClearable
-					todayButton="Сегодня"
-					className={classes.input}
-					locale={ru}
-				/>
-			</div>
-		</>
+		<div style={{width: "100%"}}>
+			<DatePicker
+				selected={value}
+				onChange={handleChange}
+				dateFormat="dd.MM.yyyy"
+				placeholderText={placeholder}
+				withPortal
+				showMonthDropdown
+				showYearDropdown
+				isClearable
+				todayButton="Сегодня"
+				className={classes.input}
+				locale={ru}
+			/>
+		</div>
 	);
 }
