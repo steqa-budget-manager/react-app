@@ -1,0 +1,78 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    background-color: rgb(var(--input-color));
+    color: rgb(var(--primary-color));
+    transition: border var(--transition-duration);
+}
+
+.input:hover {
+    border-color: rgba(var(--primary-color), 0.2);
+}
+
+.input .placeholder {
+    color: rgb(var(--secondary-color));
+}
+
+.bottom {
+    --input-top-radius: var(--border-radius);
+    --input-bottom-radius: 0;
+    --dropdown-top-radius: 0;
+    --dropdown-bottom-radius: var(--border-radius);
+}
+
+.top {
+    --input-top-radius: 0;
+    --input-bottom-radius: var(--border-radius);
+    --dropdown-top-radius: var(--border-radius);
+    --dropdown-bottom-radius: 0;
+}
+
+.input.open {
+    border-radius: var(--input-top-radius) var(--input-top-radius) var(--input-bottom-radius) var(--input-bottom-radius);
+}
+
+.container.top .dropdown {
+    bottom: 100%;
+    box-shadow: 0 -8px 8px 2px rgba(var(--background-color), 0.5);
+}
+
+.container.bottom .dropdown {
+    top: 100%;
+    box-shadow: 0 8px 8px 2px rgba(var(--background-color), 0.5);
+}
+
+.dropdown {
+    position: absolute;
+    width: 100%;
+    border-radius: var(--dropdown-top-radius) var(--dropdown-top-radius) var(--dropdown-bottom-radius) var(--dropdown-bottom-radius);
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--input-color));
+    z-index: 2;
+}
+
+.container.top .dropdown div:first-child {
+    border-radius: var(--dropdown-top-radius) var(--dropdown-top-radius) var(--dropdown-bottom-radius) var(--dropdown-bottom-radius);
+}
+
+.container.bottom .dropdown div:last-child {
+    border-radius: var(--dropdown-top-radius) var(--dropdown-top-radius) var(--dropdown-bottom-radius) var(--dropdown-bottom-radius);
+}
+
+.option {
+    padding: 16px;
+    cursor: pointer;
+    transition: background-color var(--transition-duration);
+}
+
+.option:hover {
+    background-color: rgba(var(--secondary-color), 0.25);
+}
