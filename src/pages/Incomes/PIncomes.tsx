@@ -42,21 +42,24 @@ export const PIncomes = () => {
 
 	return (
 		<>
+			<ToastBar>
+				{messages.map((message, index) => (
+					<Toast key={index} message={message} error/>
+				))}
+			</ToastBar>
 			<div className={classes.container}>
-				<ToastBar>
-					{messages.map((message, index) => (
-						<Toast key={index} message={message} error/>
-					))}
-				</ToastBar>
-				<div className={classes.cards}></div>
-				<div className={classes.filters}></div>
-				<div className={classes.transactions}>
-					{isGetIncomesLoading && (<small>Загрузка...</small>)}
-					<TransactionsHistory transactions={incomes} income/>
-				</div>
-				<div className={classes.footer}>
-					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-				</div>
+				{isGetIncomesLoading ? (
+					<small>Загрузка...</small>
+				) : (<>
+					<div className={classes.cards}></div>
+					<div className={classes.filters}></div>
+					<div className={classes.transactions}>
+						<TransactionsHistory transactions={incomes} income/>
+					</div>
+					<div className={classes.footer}>
+						<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+					</div>
+				</>)}
 			</div>
 			{showAddModal && (
 				<BottomModal onClose={() => setShowAddModal(false)}>
