@@ -26,6 +26,11 @@
     --background-color: var(--income-color);
 }
 
+.expense {
+    --color: var(--primary-color);
+    --background-color: var(--expense-color);
+}
+
 .transparent {
     --color: var(--background-color);
     background-color: rgba(var(--background-color), 0.25);
@@ -43,6 +48,10 @@
 
 .button:active {
     background-color: rgba(var(--background-color), 1);
+}
+
+.transparent:active {
+    background-color: rgba(var(--background-color), 0.4);
 }
 
 .button:disabled {

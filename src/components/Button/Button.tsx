@@ -10,6 +10,7 @@ interface ButtonProps {
 	transparent?: boolean,
 	accent?: boolean,
 	income?: boolean,
+	expense?: boolean,
 	link?: boolean,
 }
 
@@ -23,6 +24,7 @@ export const Button: FC<ButtonProps> = (
 		transparent = false,
 		accent = false,
 		income = false,
+		expense = false,
 		link = false,
 	}
 ) => {
@@ -33,6 +35,7 @@ export const Button: FC<ButtonProps> = (
 					[classes.transparent]: transparent,
 					[classes.accent]: accent,
 					[classes.income]: income,
+					[classes.expense]: expense,
 					[classes.link]: link,
 				}
 			)}
