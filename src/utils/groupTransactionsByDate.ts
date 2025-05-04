@@ -11,7 +11,7 @@ export function groupTransactionsByDate(
 	transactions: TransactionResponse[]
 ): TransactionsGroup[] {
 	return transactions.reduce<TransactionsGroup[]>((groups, transaction) => {
-		const dateKey = transaction.date.toISOString().split("T")[0];
+		const dateKey = transaction.date.toLocaleDateString();
 
 		let group = groups.find((g) => g.key === dateKey);
 

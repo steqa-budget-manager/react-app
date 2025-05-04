@@ -3,6 +3,7 @@ import {TransactionProps} from "../../components/Transaction/Transaction.tsx";
 import classes from "./TransactionsCard.module.css";
 import clsx from "clsx";
 import {fromCents} from "../../utils/moneyConverters.ts";
+import {formattedDate} from "../../utils/dateUtils.ts";
 
 export interface TransactionsCardProps {
 	income?: boolean;
@@ -22,12 +23,6 @@ export const TransactionsCard: FC<TransactionsCardProps> = (
 	}
 ) => {
 
-	const formattedDate = date.toLocaleDateString("ru", {
-		day: "numeric",
-		month: "long",
-		year: "numeric",
-	} as const).replace(/г\./, "");
-
 	return (
 		<div
 			className={clsx(
@@ -38,7 +33,7 @@ export const TransactionsCard: FC<TransactionsCardProps> = (
 			)}
 		>
 			<div className={classes.header}>
-				<p><b>{formattedDate}</b></p>
+				<p><b>{formattedDate(date)}</b></p>
 				<small className={classes.total}>{fromCents(total)} ₽</small>
 			</div>
 			<div className={classes.transactions}>{children}</div>

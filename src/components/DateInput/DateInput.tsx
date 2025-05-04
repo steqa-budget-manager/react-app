@@ -14,8 +14,8 @@ interface DateInputProps {
 export const DateInput: FC<DateInputProps> = ({value, setValue, placeholder}) => {
 	const handleChange = (date: Date | null) => {
 		if (date) {
-			const nowUtc = new Date();
-			date.setUTCHours(nowUtc.getUTCHours(), nowUtc.getUTCMinutes(), nowUtc.getUTCSeconds(), nowUtc.getUTCMilliseconds());
+			const now = new Date();
+			date.setHours(now.getHours(), now.getMinutes(), now.getSeconds(), now.getMilliseconds());
 			setValue(date);
 		} else {
 			setValue(null);
