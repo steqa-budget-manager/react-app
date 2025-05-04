@@ -4,6 +4,7 @@ import {groupTransactionsByDate, TransactionsGroup} from "../../utils/groupTrans
 import {TransactionsCard} from "../TransactionsCard/TransactionsCard.tsx";
 import classes from "./TransactionsHistory.module.css";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
+import {useNavigate} from "react-router-dom";
 
 export interface TransactionsHistoryProps {
 	transactions: TransactionResponse[];
@@ -12,6 +13,7 @@ export interface TransactionsHistoryProps {
 }
 
 export const TransactionsHistory: FC<TransactionsHistoryProps> = ({transactions, income, expense}) => {
+	const navigate = useNavigate();
 
 	const groupedTransactions = useMemo<TransactionsGroup[]>(
 		() => groupTransactionsByDate(transactions),
@@ -24,6 +26,7 @@ export const TransactionsHistory: FC<TransactionsHistoryProps> = ({transactions,
 				<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
 					{group.transactions.map((transaction) => (
 						<Transaction
+							onClick={() => navigate("/incomes/" + transaction.id)}
 							key={transaction.id}
 							description={transaction.description}
 							amount={transaction.amount}

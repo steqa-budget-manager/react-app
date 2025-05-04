@@ -3,6 +3,7 @@ import classes from "./Transaction.module.css";
 import {fromCents} from "../../utils/moneyConverters.ts";
 
 export interface TransactionProps {
+	onClick?: () => void;
 	description: string
 	amount: bigint
 	category: string
@@ -11,6 +12,7 @@ export interface TransactionProps {
 
 export const Transaction: FC<TransactionProps> = (
 	{
+		onClick,
 		description,
 		amount,
 		category,
@@ -18,7 +20,7 @@ export const Transaction: FC<TransactionProps> = (
 	}
 ) => {
 	return (
-		<div className={classes.container}>
+		<div className={classes.container} onClick={onClick}>
 			<div className={classes.left}>
 				<small><b>{description}</b></small>
 				<small className={classes.secondary}>{category}</small>

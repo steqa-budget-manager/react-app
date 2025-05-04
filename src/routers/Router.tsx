@@ -2,12 +2,22 @@ import {createBrowserRouter, Navigate} from "react-router-dom";
 import {PLogin} from "../pages/Login/PLogin.tsx";
 import {PSignup} from "../pages/Signup/PSignup.tsx";
 import {PIncomes} from "../pages/Incomes/PIncomes.tsx";
+import {PIncomeDetail} from "../pages/IncomeDetail/PIncomeDetail.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
 	{
 		path: "/incomes",
-		element: (<PIncomes/>)
+		children: [
+			{
+				index: true,
+				element: (<PIncomes/>),
+			},
+			{
+				path: ":id",
+				element: (<PIncomeDetail/>),
+			},
+		],
 	},
 	{
 		path: "/",
