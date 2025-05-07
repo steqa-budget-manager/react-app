@@ -1,5 +1,5 @@
 import {FC, ReactElement} from "react";
-import {TransactionProps} from "../../components/Transaction/Transaction.tsx";
+import {TableRowProps} from "../../components/TableRow/TableRow.tsx";
 import classes from "./TransactionsCard.module.css";
 import clsx from "clsx";
 import {fromCents} from "../../utils/moneyConverters.ts";
@@ -10,7 +10,7 @@ export interface TransactionsCardProps {
 	expense?: boolean;
 	date: Date
 	total: bigint
-	children: ReactElement<TransactionProps> | ReactElement<TransactionProps>[];
+	children: ReactElement<TableRowProps> | ReactElement<TableRowProps>[];
 }
 
 export const TransactionsCard: FC<TransactionsCardProps> = (

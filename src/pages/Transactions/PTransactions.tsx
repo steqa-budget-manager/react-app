@@ -6,7 +6,7 @@ import {Toast} from "../../components/Toast/Toast.tsx";
 import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
-import {AddTransactionForm} from "../../blocks/AddIncomeForm/AddTransactionForm.tsx";
+import {AddTransactionForm} from "../../blocks/AddTransactionForm/AddTransactionForm.tsx";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";

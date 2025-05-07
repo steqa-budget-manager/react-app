@@ -1,10 +1,11 @@
 import {FC, useMemo} from "react";
-import {Transaction} from "../../components/Transaction/Transaction.tsx";
-import {groupTransactionsByDate, TransactionsGroup} from "../../utils/groupTransactionsByDate.ts";
+import {TableRow} from "../../components/TableRow/TableRow.tsx";
+import {groupTransactionsByDate, TransactionsGroup} from "../../utils/tableRowUtils.ts";
 import {TransactionsCard} from "../TransactionsCard/TransactionsCard.tsx";
 import classes from "./TransactionsHistory.module.css";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {useNavigate} from "react-router-dom";
+import {fromCents} from "../../utils/moneyConverters.ts";
 
 export interface TransactionsHistoryProps {
 	rootPath: string;
@@ -26,13 +27,13 @@ export const TransactionsHistory: FC<TransactionsHistoryProps> = ({rootPath, tra
 			{groupedTransactions.map((group, index) => (
 				<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
 					{group.transactions.map((transaction) => (
-						<Transaction
+						<TableRow
 							onClick={() => navigate(rootPath + "/" + transaction.id)}
 							key={transaction.id}
-							description={transaction.description}
-							amount={transaction.amount}
-							category={transaction.category}
-							account={transaction.account}
+							leftTop={transaction.description}
+							rightTop={fromCents(transaction.amount) + " ₽"}
+							leftBottom={transaction.category}
+							rightBottom={transaction.account}
 						/>
 					))}
 				</TransactionsCard>

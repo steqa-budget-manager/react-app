@@ -61,7 +61,6 @@ export const updateTransaction = async (
 		...(categoryId !== undefined && {categoryId}),
 		...(description !== undefined && {description}),
 	};
-
 	const response = await api.patch(
 		"/transactions/" + id,
 		payload

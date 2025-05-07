@@ -4,6 +4,8 @@ import {PSignup} from "../pages/Signup/PSignup.tsx";
 import {PTransactions} from "../pages/Transactions/PTransactions.tsx";
 import {PTransactionDetail} from "../pages/TransactionDetail/PTransactionDetail.tsx";
 import {TransactionType} from "../api/schemas/transaction/TransactionType.ts";
+import {PTransfers} from "../pages/Transfers/PTransfers.tsx";
+import {PTransferDetail} from "../pages/TransferDetail/PTransferDetail.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -34,6 +36,19 @@ export const loggedInRouter = createBrowserRouter([
 		],
 	},
 	{
+		path: "/transfers",
+		children: [
+			{
+				index: true,
+				element: (<PTransfers rootPath="/transfers"/>),
+			},
+			{
+				path: ":id",
+				element: (<PTransferDetail rootPath="/transfers"/>),
+			},
+		],
+	},
+	{
 		path: "/",
 		element: (<Navigate to="/incomes" replace={true}/>)
 	},
@@ -59,6 +74,10 @@ export const loggedOutRouter = createBrowserRouter([
 	},
 	{
 		path: "/expenses",
+		element: (<Navigate to="/login" replace={true}/>)
+	},
+	{
+		path: "/transfers",
 		element: (<Navigate to="/login" replace={true}/>)
 	},
 ])

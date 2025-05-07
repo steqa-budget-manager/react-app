@@ -1,7 +1,7 @@
 import {useValidator} from "../../hooks/useValidator.ts";
 import {FC, FormEvent, useEffect, useMemo, useState} from "react";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
-import classes from "./AddIncomeForm.module.css";
+import classes from "./AddTransactionForm.module.css";
 import {Input} from "../../components/Input/Input.tsx";
 import {InputError} from "../../components/InputError/InputError.tsx";
 import {Button} from "../../components/Button/Button.tsx";
@@ -24,7 +24,7 @@ import {TransactionResponse} from "../../api/schemas/transaction/TransactionResp
 
 export interface AddTransactionFormProps {
 	type: TransactionType
-	onSubmit?: (newIncome: TransactionResponse) => void
+	onSubmit?: (newTransaction: TransactionResponse) => void
 	onError?: (error: string) => void
 }
 

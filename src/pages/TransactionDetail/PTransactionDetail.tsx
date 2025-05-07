@@ -122,8 +122,8 @@ export const PTransactionDetail: FC<PTransactionDetailProps> = ({type, rootPath}
 								type={type}
 								initialValues={transaction}
 								onError={addMessage}
-								onSubmit={(newIncome) => {
-									setTransaction(newIncome);
+								onSubmit={(newTransaction) => {
+									setTransaction(newTransaction);
 									setShowUpdateModal(false)
 								}}
 							/>
