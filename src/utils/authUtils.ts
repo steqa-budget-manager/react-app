@@ -3,25 +3,25 @@ import {jwtDecode} from 'jwt-decode';
 const ACCESS_TOKEN_KEY = 'access';
 const REFRESH_TOKEN_KEY = 'refresh';
 
-export function getAccessToken() {
+export const getAccessToken = () => {
 	return localStorage.getItem(ACCESS_TOKEN_KEY);
 }
 
-export function getRefreshToken() {
+export const getRefreshToken = () => {
 	return localStorage.getItem(REFRESH_TOKEN_KEY);
 }
 
-export function setTokens(accessToken: string, refreshToken: string) {
+export const setTokens = (accessToken: string, refreshToken: string) => {
 	localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
 	localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
 }
 
-export function clearTokens() {
+export const clearTokens = () => {
 	localStorage.removeItem(ACCESS_TOKEN_KEY);
 	localStorage.removeItem(REFRESH_TOKEN_KEY);
 }
 
-function isTokenExpired(token: string | null): boolean {
+const isTokenExpired = (token: string | null): boolean => {
 	if (!token) return true;
 	try {
 		const {exp} = jwtDecode(token);
@@ -31,10 +31,10 @@ function isTokenExpired(token: string | null): boolean {
 	}
 }
 
-export function isAccessTokenExpired() {
+export const isAccessTokenExpired = () => {
 	return isTokenExpired(getAccessToken());
 }
 
-export function isRefreshTokenExpired() {
+export const isRefreshTokenExpired = () => {
 	return isTokenExpired(getRefreshToken());
 }

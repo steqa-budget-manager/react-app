@@ -1,0 +1,19 @@
+.link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 16px;
+    color: rgb(var(--primary-color));
+    text-decoration: none;
+    transition: var(--transition-duration);
+}
+
+.arrow {
+    color: rgb(var(--secondary-color));
+}
+
+.link:hover, .link:focus, .link:active {
+    color: rgba(var(--secondary-color));
+    border: none;
+    outline: none;
+}

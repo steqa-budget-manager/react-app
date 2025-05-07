@@ -1,0 +1,29 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(var(--foreground-color));
+    border-radius: var(--border-radius);
+    padding: 10px 0;
+}
+
+.footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

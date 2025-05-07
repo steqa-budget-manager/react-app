@@ -6,6 +6,7 @@ import {PTransactionDetail} from "../pages/TransactionDetail/PTransactionDetail.
 import {TransactionType} from "../api/schemas/transaction/TransactionType.ts";
 import {PTransfers} from "../pages/Transfers/PTransfers.tsx";
 import {PTransferDetail} from "../pages/TransferDetail/PTransferDetail.tsx";
+import {PMore} from "../pages/More/PMore.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -49,6 +50,10 @@ export const loggedInRouter = createBrowserRouter([
 		],
 	},
 	{
+		path: "/more",
+		element: (<PMore/>)
+	},
+	{
 		path: "/",
 		element: (<Navigate to="/incomes" replace={true}/>)
 	},
@@ -78,6 +83,10 @@ export const loggedOutRouter = createBrowserRouter([
 	},
 	{
 		path: "/transfers",
+		element: (<Navigate to="/login" replace={true}/>)
+	},
+	{
+		path: "/more",
 		element: (<Navigate to="/login" replace={true}/>)
 	},
 ])

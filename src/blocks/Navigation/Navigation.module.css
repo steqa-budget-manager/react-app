@@ -35,6 +35,15 @@
     --button-color: var(--accent-color);
 }
 
+.button:focus {
+    --button-color: var(--primary-color);
+    outline: none;
+}
+
+.button:focus::before {
+    box-shadow: 0 0 16px rgba(var(--button-color), 0.3);
+}
+
 .button:hover::before, .button:active::before {
     box-shadow: 0 0 16px rgba(var(--button-color), 0.3);
 }
