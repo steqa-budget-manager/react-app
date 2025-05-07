@@ -1,27 +1,40 @@
 import classes from "./Navigation.module.css";
-import {NavigationButton} from "../../components/NavigationButton/NavigationButton.tsx";
-import {useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import clsx from "clsx";
 
 export const Navigation = () => {
-	const navigate = useNavigate();
-
 	return (
 		<div className={classes.container}>
-			<NavigationButton text="Доходы" onClick={() => {
-				navigate("/incomes");
-			}}/>
-			<NavigationButton text="Расходы" onClick={() => {
-				navigate("/expenses");
-			}}/>
-			<NavigationButton text="Переводы" onClick={() => {
-				navigate("/transfers");
-			}}/>
-			<NavigationButton text="Вклады" onClick={() => {
-				navigate("/deposits");
-			}}/>
-			<NavigationButton text="Еще" onClick={() => {
-				navigate("/more");
-			}}/>
+			<NavLink
+				to="/incomes"
+				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
+			>
+				Доходы
+			</NavLink>
+			<NavLink
+				to="/expenses"
+				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
+			>
+				Расходы
+			</NavLink>
+			<NavLink
+				to="/transfers"
+				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
+			>
+				Переводы
+			</NavLink>
+			<NavLink
+				to="/deposits"
+				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
+			>
+				Вклады
+			</NavLink>
+			<NavLink
+				to="/more"
+				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
+			>
+				Еще
+			</NavLink>
 		</div>
 	)
 }

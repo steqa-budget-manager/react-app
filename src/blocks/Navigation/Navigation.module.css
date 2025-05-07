@@ -3,3 +3,42 @@
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     align-items: center;
 }
+
+.button {
+    --button-color: var(--secondary-color);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: none;
+    color: rgb(var(--button-color));
+    font-size: 0.75rem;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: var(--transition-duration);
+}
+
+.button::before {
+    content: "";
+    display: flex;
+    height: 10px;
+    aspect-ratio: 1 / 1;
+    background-color: rgba(var(--button-color), 0.4);
+    border: 4px solid rgb(var(--button-color));
+    border-radius: 50%;
+    transition: var(--transition-duration);
+}
+
+.button:hover, .button:active {
+    --button-color: var(--accent-color);
+}
+
+.button:hover::before, .button:active::before {
+    box-shadow: 0 0 16px rgba(var(--button-color), 0.3);
+}
+
+.active {
+    --button-color: var(--accent-color);
+}

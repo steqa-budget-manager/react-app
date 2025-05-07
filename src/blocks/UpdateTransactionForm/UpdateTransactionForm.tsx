@@ -1,7 +1,7 @@
 import {useValidator} from "../../hooks/useValidator.ts";
 import {FC, FormEvent, useEffect, useMemo, useState} from "react";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
-import classes from "./UpdateIncomeForm.module.css";
+import classes from "./UpdateTransactionForm.module.css";
 import {Input} from "../../components/Input/Input.tsx";
 import {InputError} from "../../components/InputError/InputError.tsx";
 import {Button} from "../../components/Button/Button.tsx";
@@ -20,14 +20,16 @@ import {CategoryResponse} from "../../api/schemas/category/CategoryResponse.ts";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {UpdateTransaction} from "../../api/schemas/transaction/UpdateTransaction.ts";
 import {updateTransaction} from "../../api/requests/transactionRequests.ts";
+import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 
-export interface UpdateIncomeFormProps {
-	initialValues: TransactionResponse;
+export interface UpdateTransactionFormProps {
+	type: TransactionType
+	initialValues: TransactionResponse
 	onSubmit?: (newIncome: TransactionResponse) => void
 	onError?: (error: string) => void
 }
 
-export const UpdateIncomeForm: FC<UpdateIncomeFormProps> = ({initialValues, onSubmit, onError}) => {
+export const UpdateTransactionForm: FC<UpdateTransactionFormProps> = ({type, initialValues, onSubmit, onError}) => {
 	const [description, setDescription, descriptionValid, descriptionEmpty, descriptionErrors] = useValidator<string>(initialValues.description, descriptionValidator);
 	const [amount, setAmount, amountValid, amountEmpty, amountErrors] = useValidator<bigint | null>(initialValues.amount, amountValidator);
 	const [date, setDate, dateValid, dateEmpty, dateErrors] = useValidator<Date | null>(initialValues.date, dateValidator);
@@ -42,7 +44,7 @@ export const UpdateIncomeForm: FC<UpdateIncomeFormProps> = ({initialValues, onSu
 	)
 
 	const [fetchGetCategories, , getCategoriesError, resetGetCategoriesError] = useHttpRequest(
-		async () => getAllCategories()
+		async () => getAllCategories(type)
 	)
 
 	const [fetchUpdateTransaction, isUpdateTransactionLoading, updateTransactionError, resetUpdateTransactionError] = useHttpRequest(

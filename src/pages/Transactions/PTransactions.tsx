@@ -1,45 +1,50 @@
-import {useEffect, useState} from "react";
-import classes from "./Incomes.module.css"
+import {FC, useEffect, useState} from "react";
+import classes from "./Transactions.module.css"
 import {TransactionsHistory} from "../../blocks/TransactionsHistory/TransactionsHistory.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
-import {AddIncomeForm} from "../../blocks/AddIncomeForm/AddIncomeForm.tsx";
+import {AddTransactionForm} from "../../blocks/AddIncomeForm/AddTransactionForm.tsx";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {getAllTransactions} from "../../api/requests/transactionRequests.ts";
 import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
 
-export const PIncomes = () => {
+interface PTransactionsProps {
+	type: TransactionType
+	rootPath: string
+}
+
+export const PTransactions: FC<PTransactionsProps> = ({rootPath, type}) => {
 	const [messages, addMessage] = useMessagesTimeStack();
 	const [showAddModal, setShowAddModal] = useState(false);
-	const [incomes, setIncomes] = useState<TransactionResponse[]>([]);
+	const [transactions, setTransactions] = useState<TransactionResponse[]>([]);
 
-	const [fetchGetIncomes, isGetIncomesLoading, getIncomesError, resetGetIncomesError] = useHttpRequest(
-		async () => getAllTransactions(TransactionType.INCOME),
+	const [fetchGetTransactions, isGetTransactionsLoading, getTransactionsError, resetGetTransactionsError] = useHttpRequest(
+		async () => getAllTransactions(type),
 	);
 
-	const addIncomeToList = (newIncome: TransactionResponse) => {
-		setIncomes(prev => {
-			const updated = [...prev, newIncome];
+	const addTransactionToList = (newTransaction: TransactionResponse) => {
+		setTransactions(prev => {
+			const updated = [...prev, newTransaction];
 			return updated.sort((a, b) => b.date.getTime() - a.date.getTime());
 		});
 	};
 
 	useEffect(() => {
-		document.title = "Поступления";
-		fetchGetIncomes().then(setIncomes);
-	}, []);
+		document.title = type == TransactionType.INCOME ? "Доходы" : "Расходы";
+		fetchGetTransactions().then(setTransactions);
+	}, [type]);
 
 	useEffect(() => {
-		if (getIncomesError) {
-			addMessage(getIncomesError);
-			resetGetIncomesError();
+		if (getTransactionsError) {
+			addMessage(getTransactionsError);
+			resetGetTransactionsError();
 		}
-	}, [getIncomesError]);
+	}, [getTransactionsError]);
 
 	return (
 		<>
@@ -50,7 +55,7 @@ export const PIncomes = () => {
 			</ToastBar>
 
 			<div className={classes.container}>
-				{isGetIncomesLoading ?
+				{isGetTransactionsLoading ?
 					(
 						<small>Загрузка...</small>
 					) :
@@ -58,7 +63,11 @@ export const PIncomes = () => {
 						<div className={classes.cards}></div>
 						<div className={classes.filters}></div>
 						<div className={classes.transactions}>
-							<TransactionsHistory transactions={incomes} income/>
+							<TransactionsHistory
+								rootPath={rootPath}
+								transactions={transactions}
+								{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
+							/>
 						</div>
 						<div className={classes.footer}>
 							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
@@ -69,11 +78,11 @@ export const PIncomes = () => {
 			</div>
 			{showAddModal && (
 				<BottomModal onClose={() => setShowAddModal(false)}>
-					<p><b>Добавить доход</b></p>
-					<AddIncomeForm
+					<AddTransactionForm
+						type={type}
 						onError={addMessage}
-						onSubmit={(newIncome) => {
-							addIncomeToList(newIncome)
+						onSubmit={(newTransaction) => {
+							addTransactionToList(newTransaction)
 							setShowAddModal(false)
 						}}
 					/>

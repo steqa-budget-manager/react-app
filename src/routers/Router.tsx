@@ -1,8 +1,9 @@
 import {createBrowserRouter, Navigate} from "react-router-dom";
 import {PLogin} from "../pages/Login/PLogin.tsx";
 import {PSignup} from "../pages/Signup/PSignup.tsx";
-import {PIncomes} from "../pages/Incomes/PIncomes.tsx";
-import {PIncomeDetail} from "../pages/IncomeDetail/PIncomeDetail.tsx";
+import {PTransactions} from "../pages/Transactions/PTransactions.tsx";
+import {PTransactionDetail} from "../pages/TransactionDetail/PTransactionDetail.tsx";
+import {TransactionType} from "../api/schemas/transaction/TransactionType.ts";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -11,11 +12,24 @@ export const loggedInRouter = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: (<PIncomes/>),
+				element: (<PTransactions type={TransactionType.INCOME} rootPath="/incomes"/>),
 			},
 			{
 				path: ":id",
-				element: (<PIncomeDetail/>),
+				element: (<PTransactionDetail type={TransactionType.INCOME} rootPath="/incomes"/>),
+			},
+		],
+	},
+	{
+		path: "/expenses",
+		children: [
+			{
+				index: true,
+				element: (<PTransactions type={TransactionType.EXPENSE} rootPath="/expenses"/>),
+			},
+			{
+				path: ":id",
+				element: (<PTransactionDetail type={TransactionType.EXPENSE} rootPath="/expenses"/>),
 			},
 		],
 	},
@@ -41,6 +55,10 @@ export const loggedOutRouter = createBrowserRouter([
 	},
 	{
 		path: "/incomes",
+		element: (<Navigate to="/login" replace={true}/>)
+	},
+	{
+		path: "/expenses",
 		element: (<Navigate to="/login" replace={true}/>)
 	},
 ])

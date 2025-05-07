@@ -22,12 +22,13 @@ import {AddTransaction} from "../../api/schemas/transaction/AddTransaction.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 
-export interface AddIncomeFormProps {
+export interface AddTransactionFormProps {
+	type: TransactionType
 	onSubmit?: (newIncome: TransactionResponse) => void
 	onError?: (error: string) => void
 }
 
-export const AddIncomeForm: FC<AddIncomeFormProps> = ({onSubmit, onError}) => {
+export const AddTransactionForm: FC<AddTransactionFormProps> = ({type, onSubmit, onError}) => {
 	const [description, setDescription, descriptionValid, descriptionEmpty, descriptionErrors] = useValidator<string>("", descriptionValidator);
 	const [amount, setAmount, amountValid, amountEmpty, amountErrors] = useValidator<bigint | null>(null, amountValidator);
 	const [date, setDate, dateValid, dateEmpty, dateErrors] = useValidator<Date | null>(null, dateValidator);
@@ -42,7 +43,7 @@ export const AddIncomeForm: FC<AddIncomeFormProps> = ({onSubmit, onError}) => {
 	)
 
 	const [fetchGetCategories, , getCategoriesError, resetGetCategoriesError] = useHttpRequest(
-		async () => getAllCategories()
+		async () => getAllCategories(type)
 	)
 
 	const [fetchAddTransaction, isAddTransactionLoading, addTransactionError, resetAddTransactionError] = useHttpRequest(
@@ -71,7 +72,7 @@ export const AddIncomeForm: FC<AddIncomeFormProps> = ({onSubmit, onError}) => {
 		if (!isValid) return;
 
 		const transaction: AddTransaction = {
-			type: TransactionType.INCOME,
+			type: type,
 			amount: amount!,
 			date: date!,
 			accountId: accountId!,
@@ -145,14 +146,14 @@ export const AddIncomeForm: FC<AddIncomeFormProps> = ({onSubmit, onError}) => {
 
 			<div className={classes.buttonGroup}>
 				<Button
-					income
+					{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
 					transparent
 					type="submit"
 				>
 					Шаблон
 				</Button>
 				<Button
-					income
+					{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
 					type="submit"
 					active={isValid && !isAddTransactionLoading}
 				>
