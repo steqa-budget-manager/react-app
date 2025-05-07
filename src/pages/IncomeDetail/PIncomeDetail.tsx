@@ -11,6 +11,8 @@ import {formattedDate} from "../../utils/dateUtils.ts";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {Button} from "../../components/Button/Button.tsx";
 import {Modal} from "../../components/Modal/Modal.tsx";
+import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
+import {UpdateIncomeForm} from "../../blocks/UpdateIncomeForm/UpdateIncomeForm.tsx";
 
 export const PIncomeDetail = () => {
 	const {id} = useParams();
@@ -20,6 +22,7 @@ export const PIncomeDetail = () => {
 	const [income, setIncome] = useState<TransactionResponse>();
 
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [showUpdateModal, setShowUpdateModal] = useState(false);
 
 	const [fetchGetIncome, isGetIncomeLoading, getIncomeError, resetGetIncomeError] = useHttpRequest(
 		async (id: number) => getTransactionById(id),
@@ -50,7 +53,6 @@ export const PIncomeDetail = () => {
 
 	useEffect(() => {
 		if (getIncomeError) {
-			console.log(getIncomeError);
 			addMessage(getIncomeError);
 			resetGetIncomeError();
 		}
@@ -88,7 +90,7 @@ export const PIncomeDetail = () => {
 							<h1>+{fromCents(income.amount)} ₽</h1>
 						</div>
 						<div className={classes.buttonGroup}>
-							<Button>Изменить</Button>
+							<Button onClick={() => setShowUpdateModal(true)}>Изменить</Button>
 							<Button transparent expense onClick={() => setShowDeleteModal(true)}>Удалить</Button>
 						</div>
 					</div>
@@ -103,6 +105,19 @@ export const PIncomeDetail = () => {
 								{isDeleteIncomeLoading ? "Загрузка..." : "Удалить"}
 							</Button>
 						</Modal>
+					)}
+
+					{showUpdateModal && (
+						<BottomModal onClose={() => setShowUpdateModal(false)}>
+							<UpdateIncomeForm
+								initialValues={income}
+								onError={addMessage}
+								onSubmit={(newIncome) => {
+									setIncome(newIncome);
+									setShowUpdateModal(false)
+								}}
+							/>
+						</BottomModal>
 					)}
 				</>)}
 			</div>

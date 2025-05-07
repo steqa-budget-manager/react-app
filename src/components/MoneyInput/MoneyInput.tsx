@@ -9,7 +9,7 @@ interface MoneyInputProps {
 }
 
 export const MoneyInput: FC<MoneyInputProps> = ({value, setValue, placeholder}) => {
-	const [str, setStr] = useState<string>(value !== null ? String(value) : "");
+	const [str, setStr] = useState<string>(value !== null ? String(value / 100n) : "");
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value;

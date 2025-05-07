@@ -7,11 +7,12 @@ interface DropdownInputProps {
 	children: ReactElement<DropdownInputOptionProps> | ReactElement<DropdownInputOptionProps>[],
 	setValue: (value: string | null) => void;
 	placeholder?: string,
+	initSelected?: string,
 }
 
-export const DropdownInput: FC<DropdownInputProps> = ({children, setValue, placeholder}) => {
+export const DropdownInput: FC<DropdownInputProps> = ({children, setValue, placeholder, initSelected = ""}) => {
 	const [open, setOpen] = useState<boolean>(false);
-	const [selected, setSelected] = useState<string>("");
+	const [selected, setSelected] = useState<string>(initSelected);
 	const [direction, setDirection] = useState<"top" | "bottom">("bottom");
 
 	const dropdownRef = useRef<HTMLDivElement>(null);
