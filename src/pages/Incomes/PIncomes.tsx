@@ -11,6 +11,7 @@ import {TransactionResponse} from "../../api/schemas/transaction/TransactionResp
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {getAllTransactions} from "../../api/requests/transactionRequests.ts";
+import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
 
 export const PIncomes = () => {
 	const [messages, addMessage] = useMessagesTimeStack();
@@ -47,19 +48,24 @@ export const PIncomes = () => {
 					<Toast key={index} message={message} error/>
 				))}
 			</ToastBar>
+
 			<div className={classes.container}>
-				{isGetIncomesLoading ? (
-					<small>Загрузка...</small>
-				) : (<>
-					<div className={classes.cards}></div>
-					<div className={classes.filters}></div>
-					<div className={classes.transactions}>
-						<TransactionsHistory transactions={incomes} income/>
-					</div>
-					<div className={classes.footer}>
-						<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-					</div>
-				</>)}
+				{isGetIncomesLoading ?
+					(
+						<small>Загрузка...</small>
+					) :
+					(<>
+						<div className={classes.cards}></div>
+						<div className={classes.filters}></div>
+						<div className={classes.transactions}>
+							<TransactionsHistory transactions={incomes} income/>
+						</div>
+						<div className={classes.footer}>
+							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+							<Navigation/>
+						</div>
+					</>)
+				}
 			</div>
 			{showAddModal && (
 				<BottomModal onClose={() => setShowAddModal(false)}>
