@@ -6,15 +6,13 @@ import {AddAccount} from "../schemas/account/AddAccount.ts";
 export const addAccount = async (
 	account: AddAccount,
 ): Promise<AccountResponse> => {
-	const payload = {
-		...account,
-	};
 	const response = await api.post(
 		"/accounts",
-		payload
+		account,
 	)
 	return {
 		...response.data,
+		createdAt: new Date(response.data.createdAt),
 	};
 }
 
@@ -22,7 +20,10 @@ export const getAllAccounts = async (): Promise<AccountResponse[]> => {
 	const response = await api.get(
 		"/accounts" + "?visible=" + true,
 	)
-	return response.data;
+	return response.data.map((item: { createdAt: string }) => ({
+		...item,
+		createdAt: new Date(item.createdAt),
+	}));
 }
 
 export const updateAccount = async (
@@ -40,6 +41,7 @@ export const updateAccount = async (
 	)
 	return {
 		...response.data,
+		createdAt: new Date(response.data.createdAt),
 	};
 }
 

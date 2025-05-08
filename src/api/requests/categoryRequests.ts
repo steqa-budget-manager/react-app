@@ -8,5 +8,8 @@ export const getAllCategories = async (
 	const response = await api.get(
 		"/transactions/categories" + "?type=" + type,
 	)
-	return response.data;
+	return response.data.map((item: { createdAt: string }) => ({
+		...item,
+		createdAt: new Date(item.createdAt),
+	}));
 }

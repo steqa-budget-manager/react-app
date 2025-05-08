@@ -8,6 +8,7 @@ import {PTransfers} from "../pages/Transfers/PTransfers.tsx";
 import {PTransferDetail} from "../pages/TransferDetail/PTransferDetail.tsx";
 import {PMore} from "../pages/More/PMore.tsx";
 import {PAccountsSettings} from "../pages/AccountsSettings/PAccountsSettings.tsx";
+import {PCategoriesSettings} from "../pages/CategoriesSettings/CategoriesSettings.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -52,11 +53,20 @@ export const loggedInRouter = createBrowserRouter([
 	},
 	{
 		path: "/more",
-		element: (<PMore accountsSettingsPath="/accounts/settings"/>)
+		element: (
+			<PMore
+				accountsSettingsPath="/accounts/settings"
+				categoriesSettingsPath="/categories/settings"
+			/>
+		)
 	},
 	{
 		path: "/accounts/settings",
 		element: (<PAccountsSettings/>)
+	},
+	{
+		path: "/categories/settings",
+		element: (<PCategoriesSettings/>)
 	},
 	{
 		path: "/",

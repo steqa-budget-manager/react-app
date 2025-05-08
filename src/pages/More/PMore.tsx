@@ -7,9 +7,10 @@ import {AuthContext} from "../../contexts/AuthContext.tsx";
 
 interface PMoreProps {
 	accountsSettingsPath: string;
+	categoriesSettingsPath: string;
 }
 
-export const PMore: FC<PMoreProps> = ({accountsSettingsPath}) => {
+export const PMore: FC<PMoreProps> = ({accountsSettingsPath, categoriesSettingsPath}) => {
 	const {logout} = useContext(AuthContext);
 
 	return (
@@ -17,7 +18,7 @@ export const PMore: FC<PMoreProps> = ({accountsSettingsPath}) => {
 			<div className={classes.content}>
 				<div className={classes.menu}>
 					<MenuItem text="Настройка аккаунтов" to={accountsSettingsPath}/>
-					<MenuItem text="Настройка категорий" to="?"/>
+					<MenuItem text="Настройка категорий" to={categoriesSettingsPath}/>
 					<MenuItem text="Шаблоны транзакций" to="?"/>
 					<MenuItem text="Регулярные транзакции" to="?"/>
 				</div>
