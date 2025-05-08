@@ -1,7 +1,7 @@
 import {FC, useMemo} from "react";
-import {TableRow} from "../../components/TableRow/TableRow.tsx";
+import {TransactionRow} from "../../components/TransactionRow/TransactionRow.tsx";
 import {groupTransfersByDate, TransfersGroup} from "../../utils/tableRowUtils.ts";
-import {TransactionsCard} from "../TransactionsCard/TransactionsCard.tsx";
+import {TransactionsCard} from "../../components/TransactionsCard/TransactionsCard.tsx";
 import classes from "./TransfersHistory.module.css";
 import {useNavigate} from "react-router-dom";
 import {TransferResponse} from "../../api/schemas/transfers/TransferResponse.ts";
@@ -28,7 +28,7 @@ export const TransfersHistory: FC<TransfersHistoryProps> = ({rootPath, transfers
 			{groupedTransfers.map((group, index) => (
 				<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
 					{group.transfers.map((transfer) => (
-						<TableRow
+						<TransactionRow
 							onClick={() => navigate(rootPath + "/" + transfer.id)}
 							key={transfer.id}
 							leftTop={transfer.description}

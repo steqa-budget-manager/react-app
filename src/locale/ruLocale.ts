@@ -25,6 +25,11 @@ ru.set(
 	"Пользователь с таким адресом электронной почты уже существует."
 );
 
+ru.set(
+	"Account has transactions and cannot be deleted",
+	"Аккаунт не может быть удалён, так как он используется в существующих транзакциях."
+);
+
 
 export const ruLocale = (str: string): string => {
 	return ru.get(str) ?? str;

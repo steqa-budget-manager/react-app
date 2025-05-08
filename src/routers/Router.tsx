@@ -7,6 +7,7 @@ import {TransactionType} from "../api/schemas/transaction/TransactionType.ts";
 import {PTransfers} from "../pages/Transfers/PTransfers.tsx";
 import {PTransferDetail} from "../pages/TransferDetail/PTransferDetail.tsx";
 import {PMore} from "../pages/More/PMore.tsx";
+import {PAccountsSettings} from "../pages/AccountsSettings/PAccountsSettings.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -51,7 +52,11 @@ export const loggedInRouter = createBrowserRouter([
 	},
 	{
 		path: "/more",
-		element: (<PMore/>)
+		element: (<PMore accountsSettingsPath="/accounts/settings"/>)
+	},
+	{
+		path: "/accounts/settings",
+		element: (<PAccountsSettings/>)
 	},
 	{
 		path: "/",
