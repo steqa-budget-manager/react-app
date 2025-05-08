@@ -5,6 +5,8 @@ import {Controls} from "../../components/Controls/Controls.tsx";
 import {CategoryResponse} from "../../api/schemas/category/CategoryResponse.ts";
 import {getAllCategories} from "../../api/requests/categoryRequests.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
+import {Modal} from "../../components/Modal/Modal.tsx";
+import {UpdateCategoryForm} from "../UpdateCategoryForm/UpdateCategoryForm.tsx";
 
 export interface CategoriesSettingsCardProps {
 	type: TransactionType;
@@ -15,9 +17,21 @@ export interface CategoriesSettingsCardProps {
 export const CategoriesSettingsCard: FC<CategoriesSettingsCardProps> = ({type, onError, refreshTrigger}) => {
 	const [categories, setCategories] = useState<CategoryResponse[]>([]);
 
+	const [selectedCategory, setSelectedCategory] = useState<CategoryResponse>();
+
+	const [showUpdateModal, setShowUpdateModal] = useState(false);
+
 	const [fetchGetCategories, , getCategoriesError, resetGetCategoriesError] = useHttpRequest(
 		async () => getAllCategories(type)
 	)
+
+	const handleUpdateCategory = (newCategory: CategoryResponse) => {
+		if (!selectedCategory) return;
+		setCategories(prev =>
+			prev.map(category => category.id === newCategory.id ? newCategory : category)
+		);
+		setShowUpdateModal(false);
+	}
 
 	useEffect(() => {
 		if (onError && getCategoriesError) {
@@ -33,16 +47,28 @@ export const CategoriesSettingsCard: FC<CategoriesSettingsCardProps> = ({type, o
 	return (
 		<>
 			<CardsMenu header={type == TransactionType.INCOME ? "Категории доходов" : "Категории расходов"}>
-				{categories.map((account) => (<>
-					<small>{account.name}</small>
+				{categories.map((category) => (<>
+					<small>{category.name}</small>
 					<Controls
 						onEdit={() => {
+							setSelectedCategory(category);
+							setShowUpdateModal(true);
 						}}
 						onDelete={() => {
 						}}
 					/>
 				</>))}
 			</CardsMenu>
+
+			{showUpdateModal && selectedCategory && (
+				<Modal onClose={() => setShowUpdateModal(false)}>
+					<UpdateCategoryForm
+						initialValues={selectedCategory}
+						onError={onError}
+						onSubmit={(newAccount) => handleUpdateCategory(newAccount)}
+					/>
+				</Modal>
+			)}
 		</>
 	)
 }

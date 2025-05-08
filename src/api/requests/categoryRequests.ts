@@ -2,6 +2,7 @@ import api from "../api.ts";
 import {CategoryResponse} from "../schemas/category/CategoryResponse.ts";
 import {TransactionType} from "../schemas/transaction/TransactionType.ts";
 import {AddCategory} from "../schemas/category/AddCategory.ts";
+import {UpdateCategory} from "../schemas/category/UpdateCategory.ts";
 
 export const addCategory = async (
 	category: AddCategory,
@@ -26,4 +27,24 @@ export const getAllCategories = async (
 		...item,
 		createdAt: new Date(item.createdAt),
 	}));
+}
+
+export const updateCategory = async (
+	id: number,
+	category: UpdateCategory,
+): Promise<CategoryResponse> => {
+	const {type, name, visible} = category;
+	const payload = {
+		...(type !== undefined && {type}),
+		...(name !== undefined && {name}),
+		...(visible !== undefined && {visible}),
+	};
+	const response = await api.patch(
+		"/transactions/categories/" + id,
+		payload
+	)
+	return {
+		...response.data,
+		createdAt: new Date(response.data.createdAt),
+	};
 }
