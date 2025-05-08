@@ -1,0 +1,74 @@
+import classes from "./RegularTransactions.module.css";
+import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
+import {Toast} from "../../components/Toast/Toast.tsx";
+import {Button} from "../../components/Button/Button.tsx";
+import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
+import {useState} from "react";
+import {AddRegularTransactionForm} from "../../blocks/AddRegularTransactionForm/AddRegularTransactionForm.tsx";
+import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
+import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
+import {DropdownInput} from "../../components/DropdownInput/DropdownInput.tsx";
+import {DropdownInputOption} from "../../components/DropdownInput/DropdownInputOption.tsx";
+import {ruLocale} from "../../locale/ruLocale.ts";
+
+export const PRegularTransactions = () => {
+	const [messages, addMessage] = useMessagesTimeStack();
+
+	const [type, setType] = useState<string | null>();
+
+	const [showAddModal, setShowAddModal] = useState(false);
+
+	const closeModal = () => {
+		setShowAddModal(false);
+		setType(null);
+	}
+
+	const handleAddRegularTransaction = () => {
+		closeModal();
+	}
+
+	return (
+		<>
+			<div className={classes.container}>
+				<ToastBar>
+					{messages.map((message, index) => (
+						<Toast key={index} message={message} error/>
+					))}
+				</ToastBar>
+
+				<div className={classes.content}>
+				</div>
+				<div className={classes.footer}>
+					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+				</div>
+			</div>
+
+			{showAddModal && (
+				<BottomModal onClose={() => closeModal()}>
+					<DropdownInput
+						placeholder="Тип транзакции"
+						setValue={(value) => setType(value)}
+					>
+						{Object.values(TransactionType).map((type, index) => (
+							<DropdownInputOption key={index} label={ruLocale(type)} value={type}/>
+						))}
+					</DropdownInput>
+					{type == TransactionType.INCOME && (
+						<AddRegularTransactionForm
+							type={TransactionType.INCOME}
+							onError={addMessage}
+							onSubmit={() => handleAddRegularTransaction()}
+						/>
+					)}
+					{type == TransactionType.EXPENSE && (
+						<AddRegularTransactionForm
+							type={TransactionType.EXPENSE}
+							onError={addMessage}
+							onSubmit={() => handleAddRegularTransaction()}
+						/>
+					)}
+				</BottomModal>
+			)}
+		</>
+	)
+}

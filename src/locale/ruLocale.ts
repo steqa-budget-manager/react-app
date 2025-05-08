@@ -11,6 +11,26 @@ ru.set(
 );
 
 ru.set(
+	"FIXED_YEAR",
+	"Ежегодно"
+);
+
+ru.set(
+	"FIXED_MONTH",
+	"Ежемесячно"
+);
+
+ru.set(
+	"INTERVAL_DAY",
+	"Раз в несколько дней"
+);
+
+ru.set(
+	"INTERVAL_SECOND",
+	"Раз в несколько секунд"
+);
+
+ru.set(
 	"Unknown error",
 	"Неизвестная ошибка."
 )
