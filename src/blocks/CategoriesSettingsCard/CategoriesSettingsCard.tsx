@@ -7,6 +7,7 @@ import {getAllCategories} from "../../api/requests/categoryRequests.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {Modal} from "../../components/Modal/Modal.tsx";
 import {UpdateCategoryForm} from "../UpdateCategoryForm/UpdateCategoryForm.tsx";
+import {DeleteCategoryForm} from "../DeleteCategoryForm/DeleteCategoryForm.tsx";
 
 export interface CategoriesSettingsCardProps {
 	type: TransactionType;
@@ -20,10 +21,19 @@ export const CategoriesSettingsCard: FC<CategoriesSettingsCardProps> = ({type, o
 	const [selectedCategory, setSelectedCategory] = useState<CategoryResponse>();
 
 	const [showUpdateModal, setShowUpdateModal] = useState(false);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const [fetchGetCategories, , getCategoriesError, resetGetCategoriesError] = useHttpRequest(
 		async () => getAllCategories(type)
 	)
+
+	const handleDeleteCategory = () => {
+		if (!selectedCategory) return;
+		setCategories(prev =>
+			prev.filter(category => category.id !== selectedCategory.id)
+		);
+		setShowDeleteModal(false);
+	}
 
 	const handleUpdateCategory = (newCategory: CategoryResponse) => {
 		if (!selectedCategory) return;
@@ -55,6 +65,8 @@ export const CategoriesSettingsCard: FC<CategoriesSettingsCardProps> = ({type, o
 							setShowUpdateModal(true);
 						}}
 						onDelete={() => {
+							setSelectedCategory(category);
+							setShowDeleteModal(true);
 						}}
 					/>
 				</>))}
@@ -65,7 +77,17 @@ export const CategoriesSettingsCard: FC<CategoriesSettingsCardProps> = ({type, o
 					<UpdateCategoryForm
 						initialValues={selectedCategory}
 						onError={onError}
-						onSubmit={(newAccount) => handleUpdateCategory(newAccount)}
+						onSubmit={(newCategory) => handleUpdateCategory(newCategory)}
+					/>
+				</Modal>
+			)}
+
+			{showDeleteModal && selectedCategory && (
+				<Modal onClose={() => setShowDeleteModal(false)}>
+					<DeleteCategoryForm
+						category={selectedCategory}
+						onError={onError}
+						onSubmit={() => handleDeleteCategory()}
 					/>
 				</Modal>
 			)}

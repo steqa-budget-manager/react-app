@@ -40,6 +40,10 @@ ru.set(
 	"Аккаунт не может быть удалён, так как он используется в существующих транзакциях."
 );
 
+ru.set(
+	"Category has transactions and cannot be deleted",
+	"Категория не может быть удалена, так как она используется в существующих транзакциях."
+);
 
 export const ruLocale = (str: string): string => {
 	return ru.get(str) ?? str;

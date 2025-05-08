@@ -21,7 +21,7 @@ export const getAllCategories = async (
 	type: TransactionType
 ): Promise<CategoryResponse[]> => {
 	const response = await api.get(
-		"/transactions/categories" + "?type=" + type,
+		"/transactions/categories" + "?visible=" + true + "&type=" + type,
 	)
 	return response.data.map((item: { createdAt: string }) => ({
 		...item,
@@ -47,4 +47,12 @@ export const updateCategory = async (
 		...response.data,
 		createdAt: new Date(response.data.createdAt),
 	};
+}
+
+export const deleteCategory = async (
+	id: number
+): Promise<void> => {
+	await api.delete(
+		"/transactions/categories/" + id,
+	)
 }
