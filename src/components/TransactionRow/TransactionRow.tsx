@@ -1,7 +1,7 @@
 import {FC, ReactNode} from "react";
-import classes from "./TableRow.module.css";
+import classes from "./TransactionRow.module.css";
 
-export interface TableRowProps {
+export interface TransactionRowProps {
 	onClick?: () => void;
 	leftTop?: string | ReactNode
 	rightTop?: string | ReactNode
@@ -9,7 +9,7 @@ export interface TableRowProps {
 	rightBottom?: string | ReactNode
 }
 
-export const TableRow: FC<TableRowProps> = (
+export const TransactionRow: FC<TransactionRowProps> = (
 	{
 		onClick,
 		leftTop,

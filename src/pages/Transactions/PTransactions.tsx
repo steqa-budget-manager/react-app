@@ -3,7 +3,7 @@ import classes from "./Transactions.module.css"
 import {TransactionsHistory} from "../../blocks/TransactionsHistory/TransactionsHistory.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
-import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
+import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {AddTransactionForm} from "../../blocks/AddTransactionForm/AddTransactionForm.tsx";

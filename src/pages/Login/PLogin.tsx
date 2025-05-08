@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
-import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
+import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 
 export const PLogin = () => {
 	const navigate = useNavigate();

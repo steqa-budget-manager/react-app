@@ -3,7 +3,7 @@ import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {FC, useEffect, useState} from "react";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
-import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
+import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import classes from "./TransferDetail.module.css"
 import {formattedDate} from "../../utils/dateUtils.ts";
 import {fromCents} from "../../utils/moneyConverters.ts";

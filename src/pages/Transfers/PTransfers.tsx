@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from "react";
 import classes from "./Transfers.module.css"
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
-import {ToastBar} from "../../blocks/ToastBar/ToastBar.tsx";
+import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {getAllTransfers} from "../../api/requests/transferRequests.ts";
