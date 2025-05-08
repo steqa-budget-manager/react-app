@@ -1,6 +1,16 @@
 const ru = new Map<string, string>();
 
 ru.set(
+	"INCOME",
+	"Доход"
+);
+
+ru.set(
+	"EXPENSE",
+	"Расход"
+);
+
+ru.set(
 	"Unknown error",
 	"Неизвестная ошибка."
 )
