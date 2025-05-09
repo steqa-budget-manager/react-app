@@ -1,7 +1,7 @@
 export const NotFoundText = () => {
 	return (
 		<small>
-			Мы не смогли ничего найти<br/>
+			Мы ничего не нашли<br/>
 			:(
 		</small>
 	)
