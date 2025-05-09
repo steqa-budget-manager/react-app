@@ -3,7 +3,7 @@ import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Modal} from "../../components/Modal/Modal.tsx";
 import {CategoriesSettingsCard} from "../../blocks/CategoriesSettingsCard/CategoriesSettingsCard.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
@@ -20,6 +20,10 @@ export const PCategoriesSettings = () => {
 		setShowAddModal(false);
 		setRefreshCounter(refreshCounter + 1);
 	}
+
+	useEffect(() => {
+		document.title = "Настройка категорий";
+	}, []);
 
 	return (
 		<>

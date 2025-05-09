@@ -2,7 +2,7 @@ import classes from './More.module.css'
 import {MenuItem} from "../../components/MenuItem/MenuItem.tsx";
 import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
 import {Button} from "../../components/Button/Button.tsx";
-import {FC, useContext} from "react";
+import {FC, useContext, useEffect} from "react";
 import {AuthContext} from "../../contexts/AuthContext.tsx";
 
 interface PMoreProps {
@@ -13,6 +13,10 @@ interface PMoreProps {
 
 export const PMore: FC<PMoreProps> = ({accountsSettingsPath, categoriesSettingsPath, regularTransactionsPath}) => {
 	const {logout} = useContext(AuthContext);
+
+	useEffect(() => {
+		document.title = "Еще";
+	}, []);
 
 	return (
 		<div className={classes.container}>

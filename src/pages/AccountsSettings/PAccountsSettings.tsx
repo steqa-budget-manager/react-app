@@ -4,7 +4,7 @@ import {Toast} from "../../components/Toast/Toast.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {AccountsSettingsCard} from "../../blocks/AccountsSettingsCard/AccountsSettingsCard.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Modal} from "../../components/Modal/Modal.tsx";
 import {AddAccountForm} from "../../blocks/AddAccountForm/AddAccountForm.tsx";
 
@@ -19,6 +19,10 @@ export const PAccountsSettings = () => {
 		setShowAddModal(false);
 		setRefreshCounter(refreshCounter + 1);
 	}
+
+	useEffect(() => {
+		document.title = "Настройка аккаунтов";
+	}, []);
 
 	return (
 		<>

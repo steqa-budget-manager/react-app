@@ -3,7 +3,7 @@ import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {AddRegularTransactionForm} from "../../blocks/AddRegularTransactionForm/AddRegularTransactionForm.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
@@ -36,6 +36,10 @@ export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) 
 		closeModal();
 		setRefreshCounter(refreshCounter + 1);
 	}
+
+	useEffect(() => {
+		document.title = "Регулярные транзакции";
+	}, []);
 
 	return (
 		<>
