@@ -21,6 +21,8 @@ interface PRegularTransactionsProps {
 export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) => {
 	const [messages, addMessage] = useMessagesTimeStack();
 
+	const [refreshCounter, setRefreshCounter] = useState(0);
+
 	const [type, setType] = useState<string | null>();
 
 	const [showAddModal, setShowAddModal] = useState(false);
@@ -32,6 +34,7 @@ export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) 
 
 	const handleAddRegularTransaction = () => {
 		closeModal();
+		setRefreshCounter(refreshCounter + 1);
 	}
 
 	return (
@@ -44,8 +47,18 @@ export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) 
 				</ToastBar>
 
 				<div className={classes.content}>
-					<TransactionRegularsSettingsCard rootPath={rootPath} type={TransactionType.INCOME} onError={addMessage}/>
-					<TransactionRegularsSettingsCard rootPath={rootPath} type={TransactionType.EXPENSE} onError={addMessage}/>
+					<TransactionRegularsSettingsCard
+						rootPath={rootPath}
+						type={TransactionType.INCOME}
+						onError={addMessage}
+						refreshTrigger={refreshCounter}
+					/>
+					<TransactionRegularsSettingsCard
+						rootPath={rootPath}
+						type={TransactionType.EXPENSE}
+						onError={addMessage}
+						refreshTrigger={refreshCounter}
+					/>
 				</div>
 				<div className={classes.footer}>
 					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
