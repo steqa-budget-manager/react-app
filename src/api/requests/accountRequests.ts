@@ -2,6 +2,7 @@ import api from "../api.ts";
 import {AccountResponse} from "../schemas/account/AccountResponse.ts";
 import {UpdateAccount} from "../schemas/account/UpdateAccount.ts";
 import {AddAccount} from "../schemas/account/AddAccount.ts";
+import {AccountBalanceResponse} from "../schemas/account/AccountBalanceResponse.ts";
 
 export const addAccount = async (
 	account: AddAccount,
@@ -25,6 +26,17 @@ export const getAllAccounts = async (): Promise<AccountResponse[]> => {
 		createdAt: new Date(item.createdAt),
 	}));
 }
+
+export const getAllAccountsBalances = async (): Promise<AccountBalanceResponse[]> => {
+	const response = await api.get(
+		"/accounts/balances" + "?visible=" + true,
+	)
+	return response.data.map((item: { createdAt: string }) => ({
+		...item,
+		createdAt: new Date(item.createdAt),
+	}));
+}
+
 
 export const updateAccount = async (
 	id: number,

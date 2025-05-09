@@ -5,15 +5,19 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    --total-color: var(--accent-color);
+    --color: var(--primary-color);
 }
 
 .card.income {
-    --total-color: var(--income-color)
+    --color: var(--income-color)
 }
 
 .card.expense {
-    --total-color: var(--expense-color)
+    --color: var(--expense-color)
+}
+
+.card.accent {
+    --color: var(--accent-color)
 }
 
 .header {
@@ -23,11 +27,11 @@
 }
 
 .total {
-    color: rgb(var(--total-color));
-    text-shadow: 0 0 16px rgba(var(--total-color), 0.3);
+    color: rgb(var(--color));
+    text-shadow: 0 0 16px rgba(var(--color), 0.3);
 }
 
-.transactions {
+.rows {
     display: flex;
     flex-direction: column;
     gap: 16px;

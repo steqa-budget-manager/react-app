@@ -11,6 +11,7 @@ import {PAccountsSettings} from "../pages/AccountsSettings/PAccountsSettings.tsx
 import {PCategoriesSettings} from "../pages/CategoriesSettings/CategoriesSettings.tsx";
 import {PRegularTransactions} from "../pages/RegularTransactions/RegularTransactions.tsx";
 import {PRegularTransactionDetail} from "../pages/RegularTransactionDetail/PRegularTransactionDetail.tsx";
+import {PAccounts} from "../pages/Accounts/PAccounts.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -83,6 +84,10 @@ export const loggedInRouter = createBrowserRouter([
 				element: (<PRegularTransactionDetail rootPath="/transactions/regulars"/>),
 			},
 		],
+	},
+	{
+		path: "/accounts",
+		element: (<PAccounts/>)
 	},
 	{
 		path: "/",

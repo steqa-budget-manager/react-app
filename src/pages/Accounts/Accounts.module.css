@@ -31,3 +31,17 @@
     pointer-events: none;
     background: linear-gradient(to top, rgba(var(--background-color), 1) 35%, transparent 100%);
 }
+
+.totalBalance {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(var(--foreground-color));
+    border-radius: var(--border-radius);
+    padding: 16px;
+    justify-content: space-between;
+}
+
+.totalBalance .balance {
+    color: rgb(var(--accent-color));
+    text-shadow: 0 0 16px rgba(var(--accent-color), 0.3);
+}

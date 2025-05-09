@@ -1,8 +1,8 @@
 import {FC, ReactNode} from "react";
-import classes from "./TransactionRow.module.css";
+import classes from "./TableRow.module.css";
 import clsx from "clsx";
 
-export interface TransactionRowProps {
+export interface TableRowProps {
 	onClick?: () => void,
 	leftUpper?: string | ReactNode,
 	rightUpper?: string | ReactNode,
@@ -13,7 +13,7 @@ export interface TransactionRowProps {
 	secondary?: boolean,
 }
 
-export const TransactionRow: FC<TransactionRowProps> = (
+export const TableRow: FC<TableRowProps> = (
 	{
 		onClick,
 		leftUpper,

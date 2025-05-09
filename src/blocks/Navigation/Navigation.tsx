@@ -11,24 +11,28 @@ export const Navigation = () => {
 			>
 				Доходы
 			</NavLink>
+
 			<NavLink
 				to="/expenses"
 				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
 			>
 				Расходы
 			</NavLink>
+
 			<NavLink
 				to="/transfers"
 				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
 			>
 				Переводы
 			</NavLink>
+
 			<NavLink
-				to="/deposits"
+				to="/accounts"
 				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}
 			>
-				Вклады
+				Аккаунты
 			</NavLink>
+
 			<NavLink
 				to="/more"
 				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}

@@ -4,7 +4,7 @@ import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {TransactionRegularResponse} from "../../api/schemas/transaction/regular/TransactionRegularResponse.ts";
 import {getAllTransactionRegulars} from "../../api/requests/transactionRegularRequests.ts";
-import {TransactionRow} from "../../components/TransactionRow/TransactionRow.tsx";
+import {TableRow} from "../../components/TableRow/TableRow.tsx";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {useNavigate} from "react-router-dom";
 
@@ -45,7 +45,7 @@ export const TransactionRegularsSettingsCard: FC<TransactionRegularsSettingsCard
 	return (
 		<CardsMenu header={type == TransactionType.INCOME ? "Регулярные доходы" : "Регулярные расходы"}>
 			{transactionRegulars.map((transactionRegular) => (
-				<TransactionRow
+				<TableRow
 					secondary
 					onClick={() => navigate(rootPath + "/" + transactionRegular.id)}
 					key={transactionRegular.id}

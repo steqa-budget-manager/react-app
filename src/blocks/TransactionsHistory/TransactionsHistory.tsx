@@ -1,12 +1,13 @@
 import {FC, useMemo} from "react";
-import {TransactionRow} from "../../components/TransactionRow/TransactionRow.tsx";
+import {TableRow} from "../../components/TableRow/TableRow.tsx";
 import {groupTransactionsByDate, TransactionsGroup} from "../../utils/tableRowUtils.ts";
-import {TransactionsCard} from "../../components/TransactionsCard/TransactionsCard.tsx";
+import {Table} from "../../components/Table/Table.tsx";
 import classes from "./TransactionsHistory.module.css";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {useNavigate} from "react-router-dom";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
+import {formattedDate} from "../../utils/dateUtils.ts";
 
 export interface TransactionsHistoryProps {
 	rootPath: string;
@@ -27,9 +28,15 @@ export const TransactionsHistory: FC<TransactionsHistoryProps> = ({rootPath, tra
 		<div className={classes.container}>
 			{transactions.length > 0 ? (
 				groupedTransactions.map((group, index) => (
-					<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
+					<Table
+						key={index}
+						title={formattedDate(group.date)}
+						subtitle={fromCents(group.total) + "₽"}
+						income={income}
+						expense={expense}
+					>
 						{group.transactions.map((transaction) => (
-							<TransactionRow
+							<TableRow
 								onClick={() => navigate(rootPath + "/" + transaction.id)}
 								key={transaction.id}
 								leftTop={transaction.description}
@@ -38,7 +45,7 @@ export const TransactionsHistory: FC<TransactionsHistoryProps> = ({rootPath, tra
 								rightBottom={transaction.account}
 							/>
 						))}
-					</TransactionsCard>
+					</Table>
 				))
 			) : (
 				<NotFoundText/>
