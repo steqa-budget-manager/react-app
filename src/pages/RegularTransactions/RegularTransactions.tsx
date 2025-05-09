@@ -3,15 +3,22 @@ import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
-import {useState} from "react";
+import {FC, useState} from "react";
 import {AddRegularTransactionForm} from "../../blocks/AddRegularTransactionForm/AddRegularTransactionForm.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {DropdownInput} from "../../components/DropdownInput/DropdownInput.tsx";
 import {DropdownInputOption} from "../../components/DropdownInput/DropdownInputOption.tsx";
 import {ruLocale} from "../../locale/ruLocale.ts";
+import {
+	TransactionRegularsSettingsCard
+} from "../../blocks/TransactionRegularsSettingsCard/TransactionRegularsSettingsCard.tsx";
 
-export const PRegularTransactions = () => {
+interface PRegularTransactionsProps {
+	rootPath: string;
+}
+
+export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) => {
 	const [messages, addMessage] = useMessagesTimeStack();
 
 	const [type, setType] = useState<string | null>();
@@ -37,6 +44,8 @@ export const PRegularTransactions = () => {
 				</ToastBar>
 
 				<div className={classes.content}>
+					<TransactionRegularsSettingsCard rootPath={rootPath} type={TransactionType.INCOME} onError={addMessage}/>
+					<TransactionRegularsSettingsCard rootPath={rootPath} type={TransactionType.EXPENSE} onError={addMessage}/>
 				</div>
 				<div className={classes.footer}>
 					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>

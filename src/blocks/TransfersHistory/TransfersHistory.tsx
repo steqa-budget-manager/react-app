@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {TransferResponse} from "../../api/schemas/transfers/TransferResponse.ts";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {TransferAccounts} from "../../components/TransferAccounts/TransferAccounts.tsx";
+import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
 
 export interface TransfersHistoryProps {
 	rootPath: string;
@@ -25,19 +26,23 @@ export const TransfersHistory: FC<TransfersHistoryProps> = ({rootPath, transfers
 
 	return (
 		<div className={classes.container}>
-			{groupedTransfers.map((group, index) => (
-				<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
-					{group.transfers.map((transfer) => (
-						<TransactionRow
-							onClick={() => navigate(rootPath + "/" + transfer.id)}
-							key={transfer.id}
-							leftTop={transfer.description}
-							rightTop={fromCents(transfer.amount) + " ₽"}
-							leftBottom={<TransferAccounts from={transfer.fromAccount} to={transfer.toAccount}/>}
-						/>
-					))}
-				</TransactionsCard>
-			))}
+			{transfers.length > 0 ? (
+				groupedTransfers.map((group, index) => (
+					<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
+						{group.transfers.map((transfer) => (
+							<TransactionRow
+								onClick={() => navigate(rootPath + "/" + transfer.id)}
+								key={transfer.id}
+								leftTop={transfer.description}
+								rightTop={fromCents(transfer.amount) + " ₽"}
+								leftBottom={<TransferAccounts from={transfer.fromAccount} to={transfer.toAccount}/>}
+							/>
+						))}
+					</TransactionsCard>
+				))
+			) : (
+				<NotFoundText/>
+			)}
 		</div>
 	);
 };

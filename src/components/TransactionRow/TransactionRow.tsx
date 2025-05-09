@@ -1,26 +1,39 @@
 import {FC, ReactNode} from "react";
 import classes from "./TransactionRow.module.css";
+import clsx from "clsx";
 
 export interface TransactionRowProps {
-	onClick?: () => void;
-	leftTop?: string | ReactNode
-	rightTop?: string | ReactNode
-	leftBottom?: string | ReactNode
-	rightBottom?: string | ReactNode
+	onClick?: () => void,
+	leftUpper?: string | ReactNode,
+	rightUpper?: string | ReactNode,
+	leftTop?: string | ReactNode,
+	rightTop?: string | ReactNode,
+	leftBottom?: string | ReactNode,
+	rightBottom?: string | ReactNode,
+	secondary?: boolean,
 }
 
 export const TransactionRow: FC<TransactionRowProps> = (
 	{
 		onClick,
+		leftUpper,
+		rightUpper,
 		leftTop,
 		rightTop,
 		leftBottom,
-		rightBottom
+		rightBottom,
+		secondary,
 	}
 ) => {
 	return (
-		<div className={classes.container} onClick={onClick}>
+		<div
+			className={clsx(classes.container, {[classes.secondaryShadow]: secondary})}
+			onClick={onClick}
+		>
 			<div className={classes.left}>
+				{leftUpper && (
+					<small className={classes.secondary}>{leftUpper}</small>
+				)}
 				{leftTop && (
 					<small><b>{leftTop}</b></small>
 				)}
@@ -29,6 +42,9 @@ export const TransactionRow: FC<TransactionRowProps> = (
 				)}
 			</div>
 			<div className={classes.right}>
+				{rightUpper && (
+					<small className={classes.secondary}>{rightUpper}</small>
+				)}
 				{rightTop && (
 					<small>{rightTop}</small>
 				)}

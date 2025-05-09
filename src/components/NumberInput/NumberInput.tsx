@@ -15,7 +15,7 @@ export const NumberInput: FC<NumberInputProps> = ({value, setValue, placeholder,
 		<input
 			placeholder={placeholder ? placeholder : ""}
 			className={classes.input}
-			value={value ? value : undefined}
+			value={value ?? ""}
 			type="number"
 			min={min}
 			max={max}

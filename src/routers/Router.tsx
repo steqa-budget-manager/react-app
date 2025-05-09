@@ -72,7 +72,7 @@ export const loggedInRouter = createBrowserRouter([
 	},
 	{
 		path: "/transactions/regulars",
-		element: (<PRegularTransactions/>)
+		element: (<PRegularTransactions rootPath="/transactions/regulars"/>)
 	},
 	{
 		path: "/",

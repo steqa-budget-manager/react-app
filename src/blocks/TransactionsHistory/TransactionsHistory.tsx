@@ -6,6 +6,7 @@ import classes from "./TransactionsHistory.module.css";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
 import {useNavigate} from "react-router-dom";
 import {fromCents} from "../../utils/moneyConverters.ts";
+import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
 
 export interface TransactionsHistoryProps {
 	rootPath: string;
@@ -24,20 +25,24 @@ export const TransactionsHistory: FC<TransactionsHistoryProps> = ({rootPath, tra
 
 	return (
 		<div className={classes.container}>
-			{groupedTransactions.map((group, index) => (
-				<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
-					{group.transactions.map((transaction) => (
-						<TransactionRow
-							onClick={() => navigate(rootPath + "/" + transaction.id)}
-							key={transaction.id}
-							leftTop={transaction.description}
-							rightTop={fromCents(transaction.amount) + " ₽"}
-							leftBottom={transaction.category}
-							rightBottom={transaction.account}
-						/>
-					))}
-				</TransactionsCard>
-			))}
+			{transactions.length > 0 ? (
+				groupedTransactions.map((group, index) => (
+					<TransactionsCard key={index} date={group.date} total={group.total} income={income} expense={expense}>
+						{group.transactions.map((transaction) => (
+							<TransactionRow
+								onClick={() => navigate(rootPath + "/" + transaction.id)}
+								key={transaction.id}
+								leftTop={transaction.description}
+								rightTop={fromCents(transaction.amount) + " ₽"}
+								leftBottom={transaction.category}
+								rightBottom={transaction.account}
+							/>
+						))}
+					</TransactionsCard>
+				))
+			) : (
+				<NotFoundText/>
+			)}
 		</div>
 	);
 };
