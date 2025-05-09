@@ -13,6 +13,6 @@ export interface TransactionRegularResponse {
 	accountId: number,
 	category: string,
 	categoryId: number,
-	description?: string,
+	description: string,
 	rule: FixedYearRule | FixedMonthRule | IntervalDayRule | IntervalSecondRule,
 }
