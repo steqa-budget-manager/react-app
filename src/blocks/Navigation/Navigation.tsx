@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 export const Navigation = () => {
 	return (
-		<div className={classes.container}>
+		<div className={classes.navigation}>
 			<NavLink
 				to="/incomes"
 				className={({isActive}) => clsx(classes.button, {[classes.active]: isActive})}

@@ -11,7 +11,7 @@ import {TransactionResponse} from "../../api/schemas/transaction/TransactionResp
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {getAllTransactions} from "../../api/requests/transactionRequests.ts";
-import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
+import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
 
 interface PTransactionsProps {
 	type: TransactionType
@@ -69,10 +69,9 @@ export const PTransactions: FC<PTransactionsProps> = ({rootPath, type}) => {
 								{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
 							/>
 						</div>
-						<div className={classes.footer}>
+						<BottomNavigation>
 							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-							<Navigation/>
-						</div>
+						</BottomNavigation>
 					</>)
 				}
 			</div>

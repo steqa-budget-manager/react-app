@@ -6,11 +6,11 @@ import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {getAllTransfers} from "../../api/requests/transferRequests.ts";
-import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
 import {TransferResponse} from "../../api/schemas/transfers/TransferResponse.ts";
 import {TransfersHistory} from "../../blocks/TransfersHistory/TransfersHistory.tsx";
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {AddTransferForm} from "../../blocks/AddTransferForm/AddTransferForm.tsx";
+import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
 
 interface PTransfersProps {
 	rootPath: string
@@ -65,10 +65,9 @@ export const PTransfers: FC<PTransfersProps> = ({rootPath}) => {
 								transfers={transfers}
 							/>
 						</div>
-						<div className={classes.footer}>
+						<BottomNavigation>
 							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-							<Navigation/>
-						</div>
+						</BottomNavigation>
 					</>)
 				}
 			</div>

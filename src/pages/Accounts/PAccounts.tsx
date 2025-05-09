@@ -5,13 +5,13 @@ import {Toast} from "../../components/Toast/Toast.tsx";
 import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
-import {Navigation} from "../../blocks/Navigation/Navigation.tsx";
 import {getAllAccountsBalances} from "../../api/requests/accountRequests.ts";
 import {AccountBalanceResponse} from "../../api/schemas/account/AccountBalanceResponse.ts";
 import {TableRow} from "../../components/TableRow/TableRow.tsx";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {Table} from "../../components/Table/Table.tsx";
 import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
+import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
 
 export const PAccounts = () => {
 	const [messages, addMessage] = useMessagesTimeStack();
@@ -73,14 +73,13 @@ export const PAccounts = () => {
 								<NotFoundText/>
 							</Table>
 						</div>
-						<div className={classes.footer}>
+
+						<BottomNavigation>
 							<Button onClick={() => {
 							}}>
 								Открыть вклад
 							</Button>
-
-							<Navigation/>
-						</div>
+						</BottomNavigation>
 					</>)
 				}
 			</div>

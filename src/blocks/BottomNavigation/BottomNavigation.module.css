@@ -1,0 +1,17 @@
+.bottomNavigation {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bottomNavigation::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(var(--background-color), 1) 35%, transparent 100%);
+}

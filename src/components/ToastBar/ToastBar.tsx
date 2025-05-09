@@ -7,7 +7,7 @@ interface ToastBarProps {
 
 export const ToastBar: FC<ToastBarProps> = ({children}) => {
 	return (
-		<div className={classes.container}>
+		<div className={classes.toastBar}>
 			{children}
 		</div>
 	)
