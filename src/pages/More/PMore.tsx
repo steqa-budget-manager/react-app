@@ -8,10 +8,18 @@ import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.t
 interface PMoreProps {
 	accountsSettingsPath: string;
 	categoriesSettingsPath: string;
+	transactionTemplatesPath: string;
 	regularTransactionsPath: string;
 }
 
-export const PMore: FC<PMoreProps> = ({accountsSettingsPath, categoriesSettingsPath, regularTransactionsPath}) => {
+export const PMore: FC<PMoreProps> = (
+	{
+		accountsSettingsPath,
+		categoriesSettingsPath,
+		transactionTemplatesPath,
+		regularTransactionsPath
+	}
+) => {
 	const {logout} = useContext(AuthContext);
 
 	useEffect(() => {
@@ -24,7 +32,7 @@ export const PMore: FC<PMoreProps> = ({accountsSettingsPath, categoriesSettingsP
 				<div className={classes.menu}>
 					<MenuItem text="Настройка аккаунтов" to={accountsSettingsPath}/>
 					<MenuItem text="Настройка категорий" to={categoriesSettingsPath}/>
-					<MenuItem text="Шаблоны транзакций" to="?"/>
+					<MenuItem text="Шаблоны транзакций" to={transactionTemplatesPath}/>
 					<MenuItem text="Регулярные транзакции" to={regularTransactionsPath}/>
 				</div>
 			</div>

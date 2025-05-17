@@ -12,6 +12,8 @@ import {PCategoriesSettings} from "../pages/CategoriesSettings/CategoriesSetting
 import {PRegularTransactions} from "../pages/RegularTransactions/RegularTransactions.tsx";
 import {PRegularTransactionDetail} from "../pages/RegularTransactionDetail/PRegularTransactionDetail.tsx";
 import {PAccounts} from "../pages/Accounts/PAccounts.tsx";
+import {PTransactionTemplates} from "../pages/TransactionTemplates/TransactionTemplates.tsx";
+import {PTransactionTemplateDetail} from "../pages/TransactionTemplateDetail/TransactionTemplateDetail.tsx";
 
 
 export const loggedInRouter = createBrowserRouter([
@@ -60,6 +62,7 @@ export const loggedInRouter = createBrowserRouter([
 			<PMore
 				accountsSettingsPath="/accounts/settings"
 				categoriesSettingsPath="/categories/settings"
+				transactionTemplatesPath="/transactions/templates"
 				regularTransactionsPath="/transactions/regulars"
 			/>
 		)
@@ -82,6 +85,19 @@ export const loggedInRouter = createBrowserRouter([
 			{
 				path: ":id",
 				element: (<PRegularTransactionDetail rootPath="/transactions/regulars"/>),
+			},
+		],
+	},
+	{
+		path: "/transactions/templates",
+		children: [
+			{
+				index: true,
+				element: (<PTransactionTemplates rootPath="/transactions/templates"/>),
+			},
+			{
+				path: ":id",
+				element: (<PTransactionTemplateDetail rootPath="/transactions/templates"/>),
 			},
 		],
 	},
