@@ -30,10 +30,6 @@
     background: linear-gradient(to left, rgba(var(--foreground-color), 1) 35%, transparent 100%);
 }
 
-.container.secondaryShadow .left::after {
-    background: linear-gradient(to left, rgba(var(--input-color), 1) 35%, transparent 100%);
-}
-
 .container .right {
     display: flex;
     flex-direction: column;
@@ -48,4 +44,17 @@
 
 .secondary {
     color: rgb(var(--secondary-color));
+}
+
+.container.secondaryBg {
+    background-color: rgb(var(--input-color));
+}
+
+.container.secondaryBg .left::after {
+    background: linear-gradient(to left, rgba(var(--input-color), 1) 35%, transparent 100%);
+}
+
+.container.big {
+    padding: 12px;
+    border-radius: var(--border-radius);
 }

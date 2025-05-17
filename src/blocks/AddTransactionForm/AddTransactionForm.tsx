@@ -21,6 +21,10 @@ import {addTransaction} from "../../api/requests/transactionRequests.ts";
 import {AddTransaction} from "../../api/schemas/transaction/AddTransaction.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {TransactionResponse} from "../../api/schemas/transaction/TransactionResponse.ts";
+import {TransactionTemplateResponse} from "../../api/schemas/transaction/template/TransactionTemplateResponse.ts";
+import {getAllTransactionTemplates} from "../../api/requests/transactionTemplateRequests.ts";
+import {TableRow} from "../../components/TableRow/TableRow.tsx";
+import {fromCents} from "../../utils/moneyConverters.ts";
 
 export interface AddTransactionFormProps {
 	type: TransactionType
@@ -35,8 +39,14 @@ export const AddTransactionForm: FC<AddTransactionFormProps> = ({type, onSubmit,
 	const [accountId, setAccountId, accountIdValid, accountIdEmpty, accountIdErrors] = useValidator<number | null>(null, requiredValidator);
 	const [categoryId, setCategoryId, categoryIdValid, categoryIdEmpty, categoryIdErrors] = useValidator<number | null>(null, requiredValidator);
 
+	const [account, setAccount] = useState<string>();
+	const [category, setCategory] = useState<string>();
+
 	const [accounts, setAccounts] = useState<AccountResponse[]>([]);
 	const [categories, setCategories] = useState<CategoryResponse[]>([]);
+
+	const [showTemplateChoose, setShowTemplateChoose] = useState<boolean>(false);
+	const [transactionTemplates, setTransactionTemplates] = useState<TransactionTemplateResponse[]>([]);
 
 	const [fetchGetAccounts, , getAccountsError, resetGetAccountsError] = useHttpRequest(
 		async () => getAllAccounts()
@@ -49,6 +59,31 @@ export const AddTransactionForm: FC<AddTransactionFormProps> = ({type, onSubmit,
 	const [fetchAddTransaction, isAddTransactionLoading, addTransactionError, resetAddTransactionError] = useHttpRequest(
 		async (transaction: AddTransaction) => addTransaction(transaction)
 	)
+
+	const [fetchGetTransactionTemplates, , getTransactionTemplatesError, resetGetTransactionTemplatesError] = useHttpRequest(
+		async () => getAllTransactionTemplates(type)
+	)
+
+	const handleSelectTemplate = (transactionTemplate: TransactionTemplateResponse) => {
+		setDescription(transactionTemplate.description);
+		setAmount(transactionTemplate.amount);
+		setAccountId(transactionTemplate.accountId);
+		setCategoryId(transactionTemplate.categoryId);
+		setAccount(transactionTemplate.account);
+		setCategory(transactionTemplate.category);
+		setShowTemplateChoose(false);
+	}
+
+	useEffect(() => {
+		if (onError && getTransactionTemplatesError) {
+			onError(getTransactionTemplatesError);
+			resetGetTransactionTemplatesError();
+		}
+	}, [getTransactionTemplatesError]);
+
+	useEffect(() => {
+		fetchGetTransactionTemplates().then(setTransactionTemplates);
+	}, []);
 
 	const isValid = useMemo(() => {
 		return (
@@ -115,51 +150,77 @@ export const AddTransactionForm: FC<AddTransactionFormProps> = ({type, onSubmit,
 
 	return (
 		<form onSubmit={(e: FormEvent) => submit(e)} className={classes.container}>
-			<DropdownInput
-				placeholder="Аккаунт"
-				setValue={(value) => setAccountId(Number(value))}
-			>
-				{accounts.map((account, index) => (
-					<DropdownInputOption key={index} label={account.name} value={account.id.toString()}/>
-				))}
-			</DropdownInput>
-			<InputError errors={accountIdErrors}/>
-
-			<DropdownInput
-				placeholder="Категория"
-				setValue={(value) => setCategoryId(Number(value))}
-			>
-				{categories.map((category, index) => (
-					<DropdownInputOption key={index} label={category.name} value={category.id.toString()}/>
-				))}
-			</DropdownInput>
-			<InputError errors={categoryIdErrors}/>
-
-			<MoneyInput placeholder="Сумма" value={amount} setValue={setAmount}/>
-			<InputError errors={amountErrors}/>
-
-			<Input placeholder="Описание" value={description} setValue={setDescription}/>
-			<InputError errors={descriptionErrors}/>
-
-			<DateInput placeholder="Дата" value={date} setValue={setDate}/>
-			<InputError errors={dateErrors}/>
-
-			<div className={classes.buttonGroup}>
+			{showTemplateChoose ? (<>
+				<div className={classes.templates}>
+					{transactionTemplates.map((transactionTemplate) => (
+						<TableRow
+							secondary
+							big
+							key={transactionTemplate.id}
+							leftTop={transactionTemplate.description}
+							rightTop={fromCents(transactionTemplate.amount) + " ₽"}
+							leftBottom={transactionTemplate.category}
+							rightBottom={transactionTemplate.account}
+							onClick={() => handleSelectTemplate(transactionTemplate)}
+						/>
+					))}
+				</div>
 				<Button
 					{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
 					transparent
-					type="submit"
+					onClick={() => setShowTemplateChoose(false)}
 				>
-					Шаблон
+					Назад
 				</Button>
-				<Button
-					{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
-					type="submit"
-					active={isValid && !isAddTransactionLoading}
+			</>) : (<>
+				<DropdownInput
+					placeholder="Аккаунт"
+					initSelected={account}
+					setValue={(value) => setAccountId(Number(value))}
 				>
-					{isAddTransactionLoading ? "Загрузка..." : "Добавить"}
-				</Button>
-			</div>
+					{accounts.map((account, index) => (
+						<DropdownInputOption key={index} label={account.name} value={account.id.toString()}/>
+					))}
+				</DropdownInput>
+				<InputError errors={accountIdErrors}/>
+
+				<DropdownInput
+					placeholder="Категория"
+					initSelected={category}
+					setValue={(value) => setCategoryId(Number(value))}
+				>
+					{categories.map((category, index) => (
+						<DropdownInputOption key={index} label={category.name} value={category.id.toString()}/>
+					))}
+				</DropdownInput>
+				<InputError errors={categoryIdErrors}/>
+
+				<MoneyInput placeholder="Сумма" value={amount} setValue={setAmount}/>
+				<InputError errors={amountErrors}/>
+
+				<Input placeholder="Описание" value={description} setValue={setDescription}/>
+				<InputError errors={descriptionErrors}/>
+
+				<DateInput placeholder="Дата" value={date} setValue={setDate}/>
+				<InputError errors={dateErrors}/>
+
+				<div className={classes.buttonGroup}>
+					<Button
+						{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
+						transparent
+						onClick={() => setShowTemplateChoose(true)}
+					>
+						Шаблон
+					</Button>
+					<Button
+						{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
+						type="submit"
+						active={isValid && !isAddTransactionLoading}
+					>
+						{isAddTransactionLoading ? "Загрузка..." : "Добавить"}
+					</Button>
+				</div>
+			</>)}
 		</form>
 	)
 }

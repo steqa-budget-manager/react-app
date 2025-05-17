@@ -44,15 +44,15 @@ export const TransactionTemplatesSettingsCard: FC<TransactionTemplatesSettingsCa
 
 	return (
 		<CardsMenu header={type == TransactionType.INCOME ? "Шаблоны доходов" : "Шаблоны расходов"}>
-			{transactionTemplates.map((transactionRegular) => (
+			{transactionTemplates.map((transactionTemplate) => (
 				<TableRow
 					secondary
-					onClick={() => navigate(rootPath + "/" + transactionRegular.id)}
-					key={transactionRegular.id}
-					leftTop={transactionRegular.description}
-					rightTop={fromCents(transactionRegular.amount) + " ₽"}
-					leftBottom={transactionRegular.category}
-					rightBottom={transactionRegular.account}
+					onClick={() => navigate(rootPath + "/" + transactionTemplate.id)}
+					key={transactionTemplate.id}
+					leftTop={transactionTemplate.description}
+					rightTop={fromCents(transactionTemplate.amount) + " ₽"}
+					leftBottom={transactionTemplate.category}
+					rightBottom={transactionTemplate.account}
 				/>
 			))}
 		</CardsMenu>

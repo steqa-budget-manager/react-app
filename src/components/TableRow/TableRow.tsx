@@ -11,6 +11,7 @@ export interface TableRowProps {
 	leftBottom?: string | ReactNode,
 	rightBottom?: string | ReactNode,
 	secondary?: boolean,
+	big?: boolean,
 }
 
 export const TableRow: FC<TableRowProps> = (
@@ -23,11 +24,17 @@ export const TableRow: FC<TableRowProps> = (
 		leftBottom,
 		rightBottom,
 		secondary,
+		big,
 	}
 ) => {
 	return (
 		<div
-			className={clsx(classes.container, {[classes.secondaryShadow]: secondary})}
+			className={
+				clsx(classes.container, {
+					[classes.secondaryBg]: secondary,
+					[classes.big]: big,
+				})
+			}
 			onClick={onClick}
 		>
 			<div className={classes.left}>

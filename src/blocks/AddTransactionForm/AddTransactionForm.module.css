@@ -13,3 +13,10 @@
     flex-direction: row;
     gap: 8px;
 }
+
+.templates {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
