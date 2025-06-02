@@ -1,3 +1,3 @@
-export const dateValidator = (date: Date | null) => {
+export const dateValidator = () => {
 	return []
 }
