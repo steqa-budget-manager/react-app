@@ -23,7 +23,7 @@
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 8px;
     z-index: 1;
 }
 

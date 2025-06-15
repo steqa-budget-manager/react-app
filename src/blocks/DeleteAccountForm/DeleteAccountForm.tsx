@@ -59,15 +59,16 @@ export const DeleteAccountForm: FC<DeleteAccountFormProps> = ({account, onSubmit
 	}, [updateAccountError]);
 
 	return (
-		<>
+		<div className={classes.container}>
 			{offerHide ? (<>
-				<p className={classes.center}><strong>
+				<p><strong>
 					Аккаунт не может быть удалён, так как он используется в существующих транзакциях.
 				</strong></p>
-				<p className={classes.center}>
+				<p>
 					Вы можете скрыть его из общего списка — он продолжит отображаться только в тех операциях, где уже был
 					выбран.
-					<br/><br/>
+				</p>
+				<p>
 					Учтите, что во вкладке "Аккаунты" он также будет скрыт и не будет учитываться в общем
 					подсчёте средств.
 				</p>
@@ -79,7 +80,7 @@ export const DeleteAccountForm: FC<DeleteAccountFormProps> = ({account, onSubmit
 					{isUpdateAccountLoading ? "Загрузка..." : "Скрыть"}
 				</Button>
 			</>) : (<>
-				<p className={classes.center}>Вы действительно хотите<br/>безвозвратно удалить аккаунт?</p>
+				<p>Вы действительно хотите<br/>безвозвратно удалить аккаунт?</p>
 				<Button
 					expense
 					onClick={onDelete}
@@ -88,6 +89,6 @@ export const DeleteAccountForm: FC<DeleteAccountFormProps> = ({account, onSubmit
 					{isDeleteAccountLoading ? "Загрузка..." : "Удалить"}
 				</Button>
 			</>)}
-		</>
+		</div>
 	)
 }

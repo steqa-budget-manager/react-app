@@ -59,12 +59,12 @@ export const DeleteCategoryForm: FC<DeleteCategoryFormProps> = ({category, onSub
 	}, [updateCategoryError]);
 
 	return (
-		<>
+		<div className={classes.container}>
 			{offerHide ? (<>
-				<p className={classes.center}><strong>
+				<p><strong>
 					Категория не может быть удалена, так как она используется в существующих транзакциях.
 				</strong></p>
-				<p className={classes.center}>
+				<p>
 					Вы можете скрыть её из общего списка — она продолжит отображаться только в тех операциях, где уже была
 					выбрана.
 				</p>
@@ -76,7 +76,7 @@ export const DeleteCategoryForm: FC<DeleteCategoryFormProps> = ({category, onSub
 					{isUpdateCategoryLoading ? "Загрузка..." : "Скрыть"}
 				</Button>
 			</>) : (<>
-				<p className={classes.center}>Вы действительно хотите<br/>безвозвратно удалить категорию?</p>
+				<p>Вы действительно хотите<br/>безвозвратно удалить категорию?</p>
 				<Button
 					expense
 					onClick={onDelete}
@@ -85,6 +85,6 @@ export const DeleteCategoryForm: FC<DeleteCategoryFormProps> = ({category, onSub
 					{isDeleteCategoryLoading ? "Загрузка..." : "Удалить"}
 				</Button>
 			</>)}
-		</>
+		</div>
 	)
 }
