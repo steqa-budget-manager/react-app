@@ -13,12 +13,16 @@ import {ruLocale} from "../../locale/ruLocale.ts";
 import {
 	TransactionRegularsSettingsCard
 } from "../../blocks/TransactionRegularsSettingsCard/TransactionRegularsSettingsCard.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface PRegularTransactionsProps {
 	rootPath: string;
+	topPath: string;
 }
 
-export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) => {
+export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath, topPath}) => {
+	const navigate = useNavigate();
+
 	const [messages, addMessage] = useMessagesTimeStack();
 
 	const [refreshCounter, setRefreshCounter] = useState(0);
@@ -66,6 +70,7 @@ export const PRegularTransactions: FC<PRegularTransactionsProps> = ({rootPath}) 
 				</div>
 				<div className={classes.footer}>
 					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+					<Button link onClick={() => navigate(topPath)}>Назад</Button>
 				</div>
 			</div>
 

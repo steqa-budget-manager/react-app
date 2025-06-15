@@ -61,12 +61,12 @@ export const DeleteCategoryForm: FC<DeleteCategoryFormProps> = ({category, onSub
 	return (
 		<>
 			{offerHide ? (<>
-				<p className={classes.center}>
+				<p className={classes.center}><strong>
 					Категория не может быть удалена, так как она используется в существующих транзакциях.
-				</p>
+				</strong></p>
 				<p className={classes.center}>
-					Вы можете скрыть её из общего списка — она продолжит отображаться только в тех операциях,<br/>
-					где уже была выбрана.
+					Вы можете скрыть её из общего списка — она продолжит отображаться только в тех операциях, где уже была
+					выбрана.
 				</p>
 				<Button
 					expense

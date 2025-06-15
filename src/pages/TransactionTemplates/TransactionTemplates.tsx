@@ -13,12 +13,16 @@ import {
 	TransactionTemplatesSettingsCard
 } from "../../blocks/TransactionTemplatesSettingsCard/TransactionTemplatesSettingsCard.tsx";
 import {AddTransactionTemplateForm} from "../../blocks/AddTransactionTemplateForm/AddTransactionTemplateForm.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface PTransactionTemplatesProps {
 	rootPath: string;
+	topPath: string;
 }
 
-export const PTransactionTemplates: FC<PTransactionTemplatesProps> = ({rootPath}) => {
+export const PTransactionTemplates: FC<PTransactionTemplatesProps> = ({rootPath, topPath}) => {
+	const navigate = useNavigate();
+
 	const [messages, addMessage] = useMessagesTimeStack();
 
 	const [refreshCounter, setRefreshCounter] = useState(0);
@@ -66,6 +70,7 @@ export const PTransactionTemplates: FC<PTransactionTemplatesProps> = ({rootPath}
 				</div>
 				<div className={classes.footer}>
 					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+					<Button link onClick={() => navigate(topPath)}>Назад</Button>
 				</div>
 			</div>
 

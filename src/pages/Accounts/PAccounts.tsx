@@ -12,6 +12,7 @@ import {fromCents} from "../../utils/moneyConverters.ts";
 import {Table} from "../../components/Table/Table.tsx";
 import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
 import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
+import {LoadingText} from "../../components/LoadingText/LoadingText.tsx";
 
 export const PAccounts = () => {
 	const [messages, addMessage] = useMessagesTimeStack();
@@ -50,7 +51,7 @@ export const PAccounts = () => {
 			<div className={classes.container}>
 				{isGetAccountsLoading ?
 					(
-						<small>Загрузка...</small>
+						<LoadingText/>
 					) :
 					(<>
 						<div className={classes.content}>
@@ -73,15 +74,14 @@ export const PAccounts = () => {
 								<NotFoundText/>
 							</Table>
 						</div>
-
-						<BottomNavigation>
-							<Button onClick={() => {
-							}}>
-								Открыть вклад
-							</Button>
-						</BottomNavigation>
 					</>)
 				}
+				<BottomNavigation>
+					<Button onClick={() => {
+					}}>
+						Открыть вклад
+					</Button>
+				</BottomNavigation>
 			</div>
 		</>
 	)

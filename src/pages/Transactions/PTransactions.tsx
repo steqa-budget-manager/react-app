@@ -12,6 +12,7 @@ import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {getAllTransactions} from "../../api/requests/transactionRequests.ts";
 import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
+import {LoadingText} from "../../components/LoadingText/LoadingText.tsx";
 
 interface PTransactionsProps {
 	type: TransactionType
@@ -57,7 +58,7 @@ export const PTransactions: FC<PTransactionsProps> = ({rootPath, type}) => {
 			<div className={classes.container}>
 				{isGetTransactionsLoading ?
 					(
-						<small>Загрузка...</small>
+						<LoadingText/>
 					) :
 					(<>
 						<div className={classes.cards}></div>
@@ -69,11 +70,11 @@ export const PTransactions: FC<PTransactionsProps> = ({rootPath, type}) => {
 								{...(type === TransactionType.INCOME ? {income: true} : {expense: true})}
 							/>
 						</div>
-						<BottomNavigation>
-							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-						</BottomNavigation>
 					</>)
 				}
+				<BottomNavigation>
+					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+				</BottomNavigation>
 			</div>
 			{showAddModal && (
 				<BottomModal onClose={() => setShowAddModal(false)}>

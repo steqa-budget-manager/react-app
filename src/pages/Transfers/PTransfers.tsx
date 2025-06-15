@@ -11,6 +11,7 @@ import {TransfersHistory} from "../../blocks/TransfersHistory/TransfersHistory.t
 import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {AddTransferForm} from "../../blocks/AddTransferForm/AddTransferForm.tsx";
 import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
+import {LoadingText} from "../../components/LoadingText/LoadingText.tsx";
 
 interface PTransfersProps {
 	rootPath: string
@@ -55,7 +56,7 @@ export const PTransfers: FC<PTransfersProps> = ({rootPath}) => {
 			<div className={classes.container}>
 				{isGetTransfersLoading ?
 					(
-						<small>Загрузка...</small>
+						<LoadingText/>
 					) :
 					(<>
 						<div className={classes.filters}></div>
@@ -65,11 +66,11 @@ export const PTransfers: FC<PTransfersProps> = ({rootPath}) => {
 								transfers={transfers}
 							/>
 						</div>
-						<BottomNavigation>
-							<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
-						</BottomNavigation>
 					</>)
 				}
+				<BottomNavigation>
+					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+				</BottomNavigation>
 			</div>
 			{showAddModal && (
 				<BottomModal onClose={() => setShowAddModal(false)}>

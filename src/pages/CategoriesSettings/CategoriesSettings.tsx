@@ -3,13 +3,20 @@ import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {Modal} from "../../components/Modal/Modal.tsx";
 import {CategoriesSettingsCard} from "../../blocks/CategoriesSettingsCard/CategoriesSettingsCard.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {AddCategoryForm} from "../../blocks/AddCategoryForm/AddCategoryForm.tsx";
+import {useNavigate} from "react-router-dom";
 
-export const PCategoriesSettings = () => {
+interface PCategoriesSettingsProps {
+	topPath: string;
+}
+
+export const PCategoriesSettings: FC<PCategoriesSettingsProps> = ({topPath}) => {
+	const navigate = useNavigate();
+
 	const [messages, addMessage] = useMessagesTimeStack();
 
 	const [refreshCounter, setRefreshCounter] = useState(0);
@@ -40,6 +47,7 @@ export const PCategoriesSettings = () => {
 				</div>
 				<div className={classes.footer}>
 					<Button onClick={() => setShowAddModal(true)}>Добавить</Button>
+					<Button link onClick={() => navigate(topPath)}>Назад</Button>
 				</div>
 			</div>
 

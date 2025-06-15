@@ -61,12 +61,15 @@ export const DeleteAccountForm: FC<DeleteAccountFormProps> = ({account, onSubmit
 	return (
 		<>
 			{offerHide ? (<>
-				<p className={classes.center}>
+				<p className={classes.center}><strong>
 					Аккаунт не может быть удалён, так как он используется в существующих транзакциях.
-				</p>
+				</strong></p>
 				<p className={classes.center}>
-					Вы можете скрыть его из общего списка — он продолжит отображаться только в тех операциях,<br/>
-					где уже был выбран.
+					Вы можете скрыть его из общего списка — он продолжит отображаться только в тех операциях, где уже был
+					выбран.
+					<br/><br/>
+					Учтите, что во вкладке "Аккаунты" он также будет скрыт и не будет учитываться в общем
+					подсчёте средств.
 				</p>
 				<Button
 					expense

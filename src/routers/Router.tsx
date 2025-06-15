@@ -69,18 +69,18 @@ export const loggedInRouter = createBrowserRouter([
 	},
 	{
 		path: "/accounts/settings",
-		element: (<PAccountsSettings/>)
+		element: (<PAccountsSettings topPath="/more"/>)
 	},
 	{
 		path: "/categories/settings",
-		element: (<PCategoriesSettings/>)
+		element: (<PCategoriesSettings topPath="/more"/>)
 	},
 	{
 		path: "/transactions/regulars",
 		children: [
 			{
 				index: true,
-				element: (<PRegularTransactions rootPath="/transactions/regulars"/>),
+				element: (<PRegularTransactions rootPath="/transactions/regulars" topPath="/more"/>),
 			},
 			{
 				path: ":id",
@@ -93,7 +93,7 @@ export const loggedInRouter = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: (<PTransactionTemplates rootPath="/transactions/templates"/>),
+				element: (<PTransactionTemplates rootPath="/transactions/templates" topPath="/more"/>),
 			},
 			{
 				path: ":id",

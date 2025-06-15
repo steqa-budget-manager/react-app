@@ -18,7 +18,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 13px;
 }
 
 .footer::after {
