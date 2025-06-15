@@ -5,7 +5,6 @@ import {Button} from "../../components/Button/Button.tsx";
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {FC, useEffect, useState} from "react";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
-import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {DropdownInput} from "../../components/DropdownInput/DropdownInput.tsx";
 import {DropdownInputOption} from "../../components/DropdownInput/DropdownInputOption.tsx";
 import {ruLocale} from "../../locale/ruLocale.ts";
@@ -14,6 +13,7 @@ import {
 } from "../../blocks/TransactionTemplatesSettingsCard/TransactionTemplatesSettingsCard.tsx";
 import {AddTransactionTemplateForm} from "../../blocks/AddTransactionTemplateForm/AddTransactionTemplateForm.tsx";
 import {useNavigate} from "react-router-dom";
+import {Modal} from "../../components/Modal/Modal.tsx";
 
 interface PTransactionTemplatesProps {
 	rootPath: string;
@@ -75,7 +75,7 @@ export const PTransactionTemplates: FC<PTransactionTemplatesProps> = ({rootPath,
 			</div>
 
 			{showAddModal && (
-				<BottomModal onClose={() => closeModal()}>
+				<Modal onClose={() => closeModal()}>
 					<DropdownInput
 						placeholder="Тип транзакции"
 						setValue={(value) => setType(value)}
@@ -98,7 +98,7 @@ export const PTransactionTemplates: FC<PTransactionTemplatesProps> = ({rootPath,
 							onSubmit={() => handleAddTransactionTemplate()}
 						/>
 					)}
-				</BottomModal>
+				</Modal>
 			)}
 		</>
 	)
