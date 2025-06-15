@@ -101,6 +101,7 @@ export const PTransactionDetail: FC<PTransactionDetailProps> = ({type, rootPath}
 						<div className={classes.buttonGroup}>
 							<Button onClick={() => setShowUpdateModal(true)}>Изменить</Button>
 							<Button transparent expense onClick={() => setShowDeleteModal(true)}>Удалить</Button>
+							<Button link onClick={() => navigate(rootPath)}>Назад</Button>
 						</div>
 					</div>
 

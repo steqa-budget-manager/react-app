@@ -8,7 +8,6 @@ import classes from "./TransactionTemplateDetail.module.css"
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {Button} from "../../components/Button/Button.tsx";
 import {Modal} from "../../components/Modal/Modal.tsx";
-import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {TransactionTemplateResponse} from "../../api/schemas/transaction/template/TransactionTemplateResponse.ts";
 import {deleteTransactionTemplate, getTransactionTemplateById} from "../../api/requests/transactionTemplateRequests.ts";
@@ -104,6 +103,7 @@ export const PTransactionTemplateDetail: FC<PTransactionTemplateDetailProps> = (
 						<div className={classes.buttonGroup}>
 							<Button onClick={() => setShowUpdateModal(true)}>Изменить</Button>
 							<Button transparent expense onClick={() => setShowDeleteModal(true)}>Удалить</Button>
+							<Button link onClick={() => navigate(rootPath)}>Назад</Button>
 						</div>
 					</div>
 
@@ -120,7 +120,7 @@ export const PTransactionTemplateDetail: FC<PTransactionTemplateDetailProps> = (
 					)}
 
 					{showUpdateModal && (
-						<BottomModal onClose={() => setShowUpdateModal(false)}>
+						<Modal onClose={() => setShowUpdateModal(false)}>
 							<UpdateTransactionTemplateForm
 								type={transactionTemplate.type}
 								initialValues={transactionTemplate}
@@ -130,7 +130,7 @@ export const PTransactionTemplateDetail: FC<PTransactionTemplateDetailProps> = (
 									setShowUpdateModal(false)
 								}}
 							/>
-						</BottomModal>
+						</Modal>
 					)}
 				</>)}
 			</div>

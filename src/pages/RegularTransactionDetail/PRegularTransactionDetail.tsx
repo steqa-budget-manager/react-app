@@ -8,7 +8,6 @@ import classes from "./RegularTransactionDetail.module.css"
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {Button} from "../../components/Button/Button.tsx";
 import {Modal} from "../../components/Modal/Modal.tsx";
-import {BottomModal} from "../../components/BottomModal/BottomModal.tsx";
 import {TransactionType} from "../../api/schemas/transaction/TransactionType.ts";
 import {TransactionRegularResponse} from "../../api/schemas/transaction/regular/TransactionRegularResponse.ts";
 import {deleteTransactionRegular, getTransactionRegularById} from "../../api/requests/transactionRegularRequests.ts";
@@ -113,6 +112,7 @@ export const PRegularTransactionDetail: FC<PRegularTransactionDetailProps> = ({r
 						<div className={classes.buttonGroup}>
 							<Button onClick={() => setShowUpdateModal(true)}>Изменить</Button>
 							<Button transparent expense onClick={() => setShowDeleteModal(true)}>Удалить</Button>
+							<Button link onClick={() => navigate(rootPath)}>Назад</Button>
 						</div>
 					</div>
 
@@ -129,7 +129,7 @@ export const PRegularTransactionDetail: FC<PRegularTransactionDetailProps> = ({r
 					)}
 
 					{showUpdateModal && (
-						<BottomModal onClose={() => setShowUpdateModal(false)}>
+						<Modal onClose={() => setShowUpdateModal(false)}>
 							<UpdateRegularTransactionForm
 								type={transactionRegular.type}
 								initialValues={transactionRegular}
@@ -139,7 +139,7 @@ export const PRegularTransactionDetail: FC<PRegularTransactionDetailProps> = ({r
 									setShowUpdateModal(false)
 								}}
 							/>
-						</BottomModal>
+						</Modal>
 					)}
 				</>)}
 			</div>
