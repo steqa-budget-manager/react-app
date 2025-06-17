@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {FC} from "react";
+import {FC, InputHTMLAttributes} from "react";
 import classes from "./DateInput.module.css";
 import {ru} from "date-fns/locale";
 import "./DateInput.css"
@@ -22,6 +22,10 @@ export const DateInput: FC<DateInputProps> = ({value, setValue, placeholder}) =>
 		}
 	};
 
+	const ReadOnlyInput = (props: InputHTMLAttributes<HTMLInputElement>) => (
+		<input {...props} readOnly className={classes.input}/>
+	);
+
 	return (
 		<div style={{width: "100%"}}>
 			<DatePicker
@@ -34,8 +38,8 @@ export const DateInput: FC<DateInputProps> = ({value, setValue, placeholder}) =>
 				showYearDropdown
 				isClearable
 				todayButton="Сегодня"
-				className={classes.input}
 				locale={ru}
+				customInput={<ReadOnlyInput/>}
 			/>
 		</div>
 	);
