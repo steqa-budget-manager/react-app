@@ -1,6 +1,6 @@
 import {ChangeEvent, FC, useState} from "react";
 import classes from "./MoneyInput.module.css";
-import {fromCents, toCents} from "../../utils/moneyConverters.ts";
+import {toCents} from "../../utils/moneyConverters.ts";
 
 interface MoneyInputProps {
 	value: bigint | null;
@@ -9,7 +9,7 @@ interface MoneyInputProps {
 }
 
 export const MoneyInput: FC<MoneyInputProps> = ({value, setValue, placeholder}) => {
-	const [str, setStr] = useState<string>(value !== null ? fromCents(value) : "");
+	const [str, setStr] = useState<string>(value !== null ? value.toString().slice(0, -2) : "");
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const val = e.target.value;
