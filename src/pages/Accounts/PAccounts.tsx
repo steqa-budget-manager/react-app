@@ -3,14 +3,12 @@ import classes from "./Accounts.module.css"
 import {useMessagesTimeStack} from "../../hooks/useMessagesTimeStack.ts";
 import {Toast} from "../../components/Toast/Toast.tsx";
 import {ToastBar} from "../../components/ToastBar/ToastBar.tsx";
-import {Button} from "../../components/Button/Button.tsx";
 import {useHttpRequest} from "../../hooks/useHttpRequest.ts";
 import {getAllAccountsBalances} from "../../api/requests/accountRequests.ts";
 import {AccountBalanceResponse} from "../../api/schemas/account/AccountBalanceResponse.ts";
 import {TableRow} from "../../components/TableRow/TableRow.tsx";
 import {fromCents} from "../../utils/moneyConverters.ts";
 import {Table} from "../../components/Table/Table.tsx";
-import {NotFoundText} from "../../components/NotFoundText/NotFoundText.tsx";
 import {BottomNavigation} from "../../blocks/BottomNavigation/BottomNavigation.tsx";
 import {LoadingText} from "../../components/LoadingText/LoadingText.tsx";
 
@@ -70,18 +68,10 @@ export const PAccounts = () => {
 								))}
 							</Table>
 
-							<Table title="Вклады" subtitle={fromCents(0) + " ₽"}>
-								<NotFoundText/>
-							</Table>
 						</div>
 					</>)
 				}
-				<BottomNavigation>
-					<Button onClick={() => {
-					}}>
-						Открыть вклад
-					</Button>
-				</BottomNavigation>
+				<BottomNavigation/>
 			</div>
 		</>
 	)
