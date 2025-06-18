@@ -1,3 +1,5 @@
+[ru](https://github.com/steqa-cashcache/react-app) [en](https://github.com/steqa-cashcache/.github/blob/main/locale/react-app/README.en.md)
+
 # CashCache :coin: React App
 :warning: Этот репозиторий является частью проекта [CashCache](https://github.com/steqa-cashcache) :warning:  
 Для информации по установке и запуску см. [основной README](https://github.com/steqa-cashcache)
